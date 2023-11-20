@@ -7,7 +7,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Members</title>
+  <title>Instructors</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,133 +52,151 @@
 
   @include('layouts.sidebar')
 
+ 
   <div class="container mt-4">
-    <h2>Lista de Miembros del Gimnasio</h2>
+    <h2>Lista de Instructores</h2>
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-success" data-toggle="modal" data-target="#agregarMiembroModal">Agregar Miembro</button>
+        <button class="btn btn-success" data-toggle="modal" data-target="#agregarInstructorModal">Agregar Instructor</button>
     </div>
     <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filtrar por Plan
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" onclick="filterByPlan('Plan A')">Plan A</a>
-                <a class="dropdown-item" href="#" onclick="filterByPlan('Plan B')">Plan B</a>
-                <a class="dropdown-item" href="#" onclick="resetPlanFilter()">Mostrar Todos</a>
-              </div>
-            </div>
-          </th>
-          <th>Email</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Juan</td>
-          <td>Pérez</td>
-          <td>Plan A</td>
-          <td>juan@example.com</td>
-          <td>
-            <button class="btn btn-primary btn-sm">Editar</button>
-            <button class="btn btn-danger btn-sm">Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Juan</td>
-          <td>Pérez</td>
-          <td>Plan B</td>
-          <td>juan@example.com</td>
-          <td>
-            <button class="btn btn-primary btn-sm">Editar</button>
-            <button class="btn btn-danger btn-sm">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-toggle="collapse" data-target="#clasesInstructor1" aria-expanded="false" aria-controls="clasesInstructor1">
+                <td>1</td>
+                <td>Juan</td>
+                <td>Pérez</td>
+                <td>juan@example.com</td>
+                <td>123-456-7890</td>
+                <td>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarInstructorModal">Editar</button>
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="p-0">
+                    <div id="clasesInstructor1" class="collapse">
+                        <div class="card card-body">
+                            Clases que imparte Juan:
+                            <ul>
+                                <li>Clase A</li>
+                                <li>Clase B</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr data-toggle="collapse" data-target="#clasesInstructor2" aria-expanded="false" aria-controls="clasesInstructor2">
+                <td>2</td>
+                <td>Maria</td>
+                <td>García</td>
+                <td>maria@example.com</td>
+                <td>987-654-3210</td>
+                <td>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editarInstructorModal">Editar</button>
+                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="p-0">
+                    <div id="clasesInstructor2" class="collapse">
+                        <div class="card card-body">
+                            Clases que imparte Maria:
+                            <ul>
+                                <li>Clase C</li>
+                                <li>Clase D</li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
     </table>
-  </div>
+</div>
 
-  <!-- Agregar miembro -->
-
-  <div class="modal fade" id="agregarMiembroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<!-- Ventana agregar instructor -->
+<div class="modal fade" id="agregarInstructorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar Miembro</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo Instructor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" class="form-control" id="apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" class="form-control" id="telefono">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-            </div>
-            <div class="form-group">
-              <label for="apellido">Apellido</label>
-              <input type="text" class="form-control" id="apellido" placeholder="Apellido">
-            </div>
-            <div class="form-group">
-              <label for="plan">Plan</label>
-              <select class="form-control" id="plan">
-                <option>Plan A</option>
-                <option>Plan B</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Email">
-            </div>
-            <div class="text-center mt-3"> <!-- Se añade un margen superior -->
-              <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<!-- Vntana editar instructor -->
+<div class="modal fade" id="editarInstructorModal" tabindex="-1" role="dialog" aria-labelledby="editarInstructorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarInstructorModalLabel">Editar Instructor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="editNombre">Nombre:</label>
+                        <input type="text" class="form-control" id="editNombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="editApellido">Apellido:</label>
+                        <input type="text" class="form-control" id="editApellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email:</label>
+                        <input type="email" class="form-control" id="editEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="editTelefono">Teléfono:</label>
+                        <input type="text" class="form-control" id="editTelefono">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-
-  <!-- Filtro por planes -->
-
-  <script>
-    function filterByPlan(plan) {
-      $('table tbody tr').each(function () {
-        var planTexto = $(this).find('td:eq(3)').text().trim();
-        if (plan === "Mostrar Todos") {
-          $(this).show();
-        } else {
-          if (planTexto !== plan) {
-            $(this).hide();
-          } else {
-            $(this).show();
-          }
-        }
-      });
-    }
-
-    function resetPlanFilter() {
-      $('table tbody tr').show();
-    }
-  </script>
-
-
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
+<!-- Bootstrap JS y dependencias -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Core JS -->
   <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
   <script src="../../assets/vendor/libs/popper/popper.js"></script>
