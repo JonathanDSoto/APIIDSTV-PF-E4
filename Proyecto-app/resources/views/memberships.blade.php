@@ -54,96 +54,122 @@
 
 
   <div class="container mt-4">
-  <h2>Tipos de Planes en el Gimnasio</h2>
-  <div class="d-flex justify-content-end mb-3">
-    <button class="btn btn-success" data-toggle="modal" data-target="#agregarTarifaModal">Agregar Tarifa Nueva</button>
+    <h2>Tipos de Planes en el Gimnasio</h2>
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success" data-toggle="modal" data-target="#agregarTarifaModal">Agregar Tarifa
+        Nueva</button>
+    </div>
+    <table class="table table-striped text-center">
+      <thead>
+        <tr>
+          <th>Nombre del Plan</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Plan Básico</td>
+          <td>$30</td>
+          <td>
+            <button class="btn btn-primary btn-sm editarTarifa" data-toggle="modal"
+              data-target="#editarTarifaModal">Editar</button>
+            <button class="btn btn-danger btn-sm eliminarTarifa" data-toggle="modal" data-target="#eliminarTarifaModal"
+              data-nombre-tarifa="Plan Básico">Eliminar</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Plan Premium</td>
+          <td>$50</td>
+          <td>
+            <button class="btn btn-primary btn-sm editarTarifa" data-toggle="modal"
+              data-target="#editarTarifaModal">Editar</button>
+            <button class="btn btn-danger btn-sm eliminarTarifa" data-toggle="modal" data-target="#eliminarTarifaModal"
+              data-nombre-tarifa="Plan Básico">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <table class="table table-striped text-center">
-    <thead>
-      <tr>
-        <th>Nombre del Plan</th>
-        <th>Precio</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Plan Básico</td>
-        <td>$30</td>
-        <td>
-          <button class="btn btn-primary btn-sm editarTarifa" data-toggle="modal" data-target="#editarTarifaModal">Editar</button>
-          <button class="btn btn-danger btn-sm eliminarTarifa">Eliminar</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Plan Premium</td>
-        <td>$50</td>
-        <td>
-          <button class="btn btn-primary btn-sm editarTarifa" data-toggle="modal" data-target="#editarTarifaModal">Editar</button>
-          <button class="btn btn-danger btn-sm eliminarTarifa">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-<!--agregar tarifa nueva -->
-<div class="modal fade" id="agregarTarifaModal" tabindex="-1" role="dialog" aria-labelledby="agregarTarifaModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="agregarTarifaModalLabel">Agregar Tarifa Nueva</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="nombrePlan">Nombre del Plan:</label>
-            <input type="text" class="form-control" id="nombrePlan">
-          </div>
-          <div class="form-group">
-            <label for="precioPlan">Precio:</label>
-            <input type="text" class="form-control" id="precioPlan">
-          </div>
+  <!-- Agregar tarifa nueva -->
+  <div class="modal fade" id="agregarTarifaModal" tabindex="-1" role="dialog" aria-labelledby="agregarTarifaModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="agregarTarifaModalLabel">Agregar Tarifa Nueva</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="nombrePlan">Nombre del Plan:</label>
+              <input type="text" class="form-control" id="nombrePlan">
+            </div>
+            <div class="form-group">
+              <label for="precioPlan">Precio:</label>
+              <input type="text" class="form-control" id="precioPlan">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center"> <!-- Ajuste de los botones en el centro -->
+          <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Agregar</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Editar tarifa -->
-<div class="modal fade" id="editarTarifaModal" tabindex="-1" role="dialog" aria-labelledby="editarTarifaModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editarTarifaModalLabel">Editar Tarifa</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="editarNombrePlan">Nombre del Plan:</label>
-            <input type="text" class="form-control" id="editarNombrePlan">
-          </div>
-          <div class="form-group">
-            <label for="editarPrecioPlan">Precio:</label>
-            <input type="text" class="form-control" id="editarPrecioPlan">
-          </div>
+  <!-- Editar tarifa -->
+  <div class="modal fade" id="editarTarifaModal" tabindex="-1" role="dialog" aria-labelledby="editarTarifaModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarTarifaModalLabel">Editar Tarifa</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="editarNombrePlan">Nombre del Plan:</label>
+              <input type="text" class="form-control" id="editarNombrePlan">
+            </div>
+            <div class="form-group">
+              <label for="editarPrecioPlan">Precio:</label>
+              <input type="text" class="form-control" id="editarPrecioPlan">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Eliminar tarifa -->
+  <div class="modal fade" id="eliminarTarifaModal" tabindex="-1" role="dialog"
+    aria-labelledby="eliminarTarifaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminarTarifaModalLabel">Confirmar Eliminación</h5>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro que quieres eliminar la tarifa "nombre de la tarifa" ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" id="confirmarEliminar">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <!-- Core JS -->
   <script src="../../assets/vendor/libs/jquery/jquery.js"></script>

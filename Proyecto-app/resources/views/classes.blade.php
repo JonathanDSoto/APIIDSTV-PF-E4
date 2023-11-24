@@ -53,14 +53,15 @@
   @include('layouts.sidebar')
 
   <div class="container mt-4">
-    <h2>Lista de Clases</h2>
+    <h2>Class List</h2>
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addClassModal">Add Class</button>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Clase</th>
+          <th>Class</th>
           <th>Instructor</th>
-          <th>Miembros Inscritos</th>
-          <th>Acciones</th>
+          <th>Registered Members</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -69,75 +70,175 @@
           <td>María</td>
           <td>15</td>
           <td>
-            <button class="btn btn-primary btn-sm" onclick="editarClase('Yoga')">Editar</button>
-            <button class="btn btn-danger btn-sm" onclick="eliminarClase('Yoga')">Eliminar</button>
-            <button class="btn btn-info btn-sm" onclick="toggleInfo('yogaInfo', 'Yoga')">Ver</button>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editClassModal">Edit</button>
+            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteClassModal">Delete</button>
+            <button class="btn btn-info btn-sm" onclick="toggleInfo('yogaInfo', 'Yoga')">View</button>
           </td>
         </tr>
         <tr class="additional-info" id="yogaInfo" style="display: none;">
           <td colspan="4">
             <strong>Instructor: </strong>María<br>
-            <strong>Horario: </strong>Horario de Yoga<br>
-            <strong>Miembros:</strong>
+            <strong>Schedule: </strong>Yoga Schedule<br>
+            <strong>Members:</strong>
             <div style="text-align: right;">
-              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#agregarMiembroModal">Agregar Miembro</button>
+              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addMemberModal">Add
+                Member</button>
             </div>
             <table class="table">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Acciones</th>
+                  <th>Name</th>
+                  <th>Last Name</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
                   <td>Elena</td>
-                  <td>Gómez</td>
+                  <td>Gomez</td>
                   <td>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarMiembro('Yoga', 1)">Eliminar</button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteMemberModal">Delete
+                      Member</button>
                   </td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>Pedro</td>
-                  <td>López</td>
+                  <td>Lopez</td>
                   <td>
-                    <button class="btn btn-danger btn-sm" onclick="eliminarMiembro('Yoga', 2)">Eliminar</button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteMemberModal">Delete
+                      Member</button>
                   </td>
                 </tr>
-                <!-- Agrega más filas para más miembros -->
               </tbody>
             </table>
           </td>
         </tr>
-        <!-- Repite la estructura para más clases si es necesario -->
       </tbody>
     </table>
   </div>
 
-  <!-- Modal para agregar miembro -->
-  <div class="modal fade" id="agregarMiembroModal" tabindex="-1" role="dialog" aria-labelledby="agregarMiembroModalLabel" aria-hidden="true">
+  <!-- agregar nuevo miembro -->
+  <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="agregarMiembroModalLabel">Agregar Miembro por ID</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title" id="addMemberModalLabel">Add Member</h5>
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="userIdInput">ID del Usuario:</label>
-            <input type="number" class="form-control" id="userIdInput">
+            <label for="memberNameInput">Name:</label>
+            <input type="text" class="form-control" id="memberNameInput">
           </div>
-          <div id="errorDisplay" class="text-danger" style="display: none;">El ID de usuario no existe.</div>
+          <div class="form-group">
+            <label for="memberLastNameInput">Last Name:</label>
+            <input type="text" class="form-control" id="memberLastNameInput">
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" onclick="buscarMiembro()">Agregar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="addMember()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- agregar nueva clase -->
+  <div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addClassModalLabel">Add New Class</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="classNameInput">Class Name:</label>
+            <input type="text" class="form-control" id="classNameInput">
+          </div>
+          <div class="form-group">
+            <label for="instructorInput">Instructor:</label>
+            <input type="text" class="form-control" id="instructorInput">
+          </div>
+          <div class="form-group">
+            <label for="scheduleInput">Schedule:</label>
+            <input type="text" class="form-control" id="scheduleInput">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="addClass()">Add Class</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- editar clase -->
+  <div class="modal fade" id="editClassModal" tabindex="-1" role="dialog" aria-labelledby="editClassModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editClassModalLabel">Edit Class</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="editClassNameInput">Class Name:</label>
+            <input type="text" class="form-control" id="editClassNameInput">
+          </div>
+          <div class="form-group">
+            <label for="editInstructorInput">Instructor:</label>
+            <input type="text" class="form-control" id="editInstructorInput">
+          </div>
+          <div class="form-group">
+            <label for="editScheduleInput">Schedule:</label>
+            <input type="text" class="form-control" id="editScheduleInput">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- eliminar clase -->
+  <div class="modal fade" id="deleteClassModal" tabindex="-1" role="dialog" aria-labelledby="deleteClassModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteClassModalLabel">Delete Class</h5>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete the class "<span id="classNameToDelete"></span>"?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" onclick="deleteClass()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- eliminar miembro de la clase  -->
+  <div class="modal fade" id="deleteMemberModal" tabindex="-1" role="dialog" aria-labelledby="deleteMemberModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteMemberModalLabel">Delete Member</h5>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete the member "<span id="memberNameToDelete"></span>"?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" onclick="deleteMember()">Delete</button>
         </div>
       </div>
     </div>
@@ -148,50 +249,14 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script>
-    function toggleInfo(infoId, clase) {
-      var info = document.getElementById(infoId);
-      if (info.style.display === "none") {
-        info.style.display = "table-row";
-      } else {
-        info.style.display = "none";
-      }
-    }
-
-    function editarClase(clase) {
-      console.log("Editar " + clase);
-      // Aquí va la lógica para editar la clase
-    }
-
-    function eliminarClase(clase) {
-      console.log("Eliminar " + clase);
-      // Aquí va la lógica para eliminar la clase
-    }
-
-    function eliminarMiembro(clase, id) {
-      console.log("Eliminar miembro con ID " + id + " de la clase " + clase);
-      // Aquí va la lógica para eliminar el miembro de la clase
-    }
-
-    function buscarMiembro() {
-      var userId = document.getElementById('userIdInput').value;
-      // Simulación de búsqueda
-      var usuarios = [
-        { id: 1, nombre: 'Elena', apellido: 'Gómez' },
-        { id: 2, nombre: 'Pedro', apellido: 'López' }
-      ];
-
-      var encontrado = usuarios.find(function(usuario) {
-        return usuario.id === parseInt(userId);
-      });
-
-      if (encontrado) {
-        // Aquí iría la lógica para agregar al miembro a la clase
-        console.log("Usuario encontrado: ", encontrado);
-      } else {
-        var errorDisplay = document.getElementById('errorDisplay');
-        errorDisplay.style.display = 'block';
-      }
-    }
+function toggleInfo(infoId, className) {
+  var info = document.getElementById(infoId);
+  if (info.style.display === "none") {
+    info.style.display = "table-row";
+  } else {
+    info.style.display = "none";
+  }
+}
   </script>
 
 
