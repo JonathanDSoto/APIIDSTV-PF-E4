@@ -8,8 +8,8 @@ Route::get('/', function () {
 
 
 Route::get('/', function () {
-    return view('home');
-})->name('home');
+    return view('login');
+})->name('login');
 
 Route::get('/members', function () {
     return view('members');
@@ -27,6 +27,6 @@ Route::get('/instructors', function () {
     return view('instructors');
 })->name('instructors');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::get('/home', function () {
+    return view('home');
+})->name('home');

@@ -54,114 +54,113 @@
 
 
   <div class="container mt-4">
-    <h2>Tipos de Planes en el Gimnasio</h2>
+    <h2>Types of Plans at the Gym</h2>
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-success" data-toggle="modal" data-target="#agregarTarifaModal">Agregar Tarifa
-        Nueva</button>
+      <button class="btn btn-success" data-toggle="modal" data-target="#agregarTarifaModal">Add New Plan</button>
     </div>
     <table class="table table-striped text-center">
       <thead>
         <tr>
-          <th>Nombre del Plan</th>
-          <th>Precio</th>
-          <th>Acciones</th>
+          <th>Plan Name</th>
+          <th>Price</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Plan Básico</td>
+          <td>Basic Plan</td>
           <td>$30</td>
           <td>
             <button class="btn btn-primary btn-sm editarTarifa" data-toggle="modal"
-              data-target="#editarTarifaModal">Editar</button>
+              data-target="#editarTarifaModal">Edit</button>
             <button class="btn btn-danger btn-sm eliminarTarifa" data-toggle="modal" data-target="#eliminarTarifaModal"
-              data-nombre-tarifa="Plan Básico">Eliminar</button>
+              data-nombre-tarifa="Basic Plan">Delete</button>
           </td>
         </tr>
         <tr>
-          <td>Plan Premium</td>
+          <td>Premium Plan</td>
           <td>$50</td>
           <td>
             <button class="btn btn-primary btn-sm editarTarifa" data-toggle="modal"
-              data-target="#editarTarifaModal">Editar</button>
+              data-target="#editarTarifaModal">Edit</button>
             <button class="btn btn-danger btn-sm eliminarTarifa" data-toggle="modal" data-target="#eliminarTarifaModal"
-              data-nombre-tarifa="Plan Básico">Eliminar</button>
+              data-nombre-tarifa="Premium Plan">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Agregar tarifa nueva -->
+  <!-- agregar plan -->
   <div class="modal fade" id="agregarTarifaModal" tabindex="-1" role="dialog" aria-labelledby="agregarTarifaModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="agregarTarifaModalLabel">Agregar Tarifa Nueva</h5>
+          <h5 class="modal-title" id="agregarTarifaModalLabel">Add New Plan</h5>
         </div>
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="nombrePlan">Nombre del Plan:</label>
+              <label for="nombrePlan">Plan Name:</label>
               <input type="text" class="form-control" id="nombrePlan">
             </div>
             <div class="form-group">
-              <label for="precioPlan">Precio:</label>
+              <label for="precioPlan">Price:</label>
               <input type="text" class="form-control" id="precioPlan">
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-center"> <!-- Ajuste de los botones en el centro -->
-          <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Agregar</button>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Editar tarifa -->
+  <!-- editar plan -->
   <div class="modal fade" id="editarTarifaModal" tabindex="-1" role="dialog" aria-labelledby="editarTarifaModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editarTarifaModalLabel">Editar Tarifa</h5>
+          <h5 class="modal-title" id="editarTarifaModalLabel">Edit Plan</h5>
         </div>
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="editarNombrePlan">Nombre del Plan:</label>
+              <label for="editarNombrePlan">Plan Name:</label>
               <input type="text" class="form-control" id="editarNombrePlan">
             </div>
             <div class="form-group">
-              <label for="editarPrecioPlan">Precio:</label>
+              <label for="editarPrecioPlan">Price:</label>
               <input type="text" class="form-control" id="editarPrecioPlan">
             </div>
           </form>
         </div>
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Eliminar tarifa -->
+  <!-- eliminar plan -->
   <div class="modal fade" id="eliminarTarifaModal" tabindex="-1" role="dialog"
     aria-labelledby="eliminarTarifaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="eliminarTarifaModalLabel">Confirmar Eliminación</h5>
+          <h5 class="modal-title" id="eliminarTarifaModalLabel">Confirm Deletion</h5>
         </div>
         <div class="modal-body">
-          <p>¿Estás seguro que quieres eliminar la tarifa "nombre de la tarifa" ?</p>
+          <p>Are you sure you want to delete the plan "<span id="nombreTarifaEliminar"></span>"?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirmarEliminar">Eliminar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmarEliminar">Delete</button>
         </div>
       </div>
     </div>

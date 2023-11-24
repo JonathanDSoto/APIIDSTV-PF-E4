@@ -65,6 +65,59 @@
         </tr>
       </thead>
       <tbody>
+        
+        <tr class="class-row" id="zumbaRow">
+          <td>Zumba</td>
+          <td>Carlos</td>
+          <td>20</td>
+          <td>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editClassModal">Edit</button>
+            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteClassModal">Delete</button>
+            <button class="btn btn-info btn-sm" data-target-info="zumbaInfo">View</button>
+          </td>
+        </tr>
+        <tr class="additional-info" id="zumbaInfo" style="display: none;">
+          <td colspan="4">
+            <strong>Instructor: </strong>Carlos<br>
+            <strong>Schedule: </strong>Zumba Schedule<br>
+            <strong>Members:</strong>
+            <div style="text-align: right;">
+              <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addMemberModal">Add
+                Member</button>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Last Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Andrea</td>
+                  <td>Rodriguez</td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteMemberModal">Delete
+                      Member</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Miguel</td>
+                  <td>Martinez</td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteMemberModal">Delete
+                      Member</button>
+                  </td>
+                </tr>
+                <!-- Add more rows for members here -->
+              </tbody>
+            </table>
+          </td>
+        </tr>
         <tr class="class-row" id="yogaRow">
           <td>Yoga</td>
           <td>María</td>
@@ -72,7 +125,7 @@
           <td>
             <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editClassModal">Edit</button>
             <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteClassModal">Delete</button>
-            <button class="btn btn-info btn-sm" onclick="toggleInfo('yogaInfo', 'Yoga')">View</button>
+            <button class="btn btn-info btn-sm" data-target-info="yogaInfo">View</button>
           </td>
         </tr>
         <tr class="additional-info" id="yogaInfo" style="display: none;">
@@ -249,14 +302,26 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script>
-function toggleInfo(infoId, className) {
-  var info = document.getElementById(infoId);
-  if (info.style.display === "none") {
-    info.style.display = "table-row";
-  } else {
-    info.style.display = "none";
-  }
-}
+
+    
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const viewButtons = document.querySelectorAll('.btn-info');
+
+      viewButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          const infoId = this.dataset.targetInfo;
+          const infoElement = document.getElementById(infoId);
+
+          if (infoElement.style.display === 'none' || infoElement.style.display === '') {
+            infoElement.style.display = 'table-row';
+          } else {
+            infoElement.style.display = 'none';
+          }
+        });
+      });
+    });
+
   </script>
 
 
