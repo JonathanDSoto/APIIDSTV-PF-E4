@@ -52,82 +52,79 @@
 
   @include('layouts.sidebar')
 
+
   <div class="container mt-4">
-    <h2>Lista de Miembros del Gimnasio</h2>
+    <h2>Gym Members List</h2>
     <div class="d-flex justify-content-end mb-3">
-      <button class="btn btn-success" data-toggle="modal" data-target="#agregarMiembroModal">Agregar Miembro</button>
+      <button class="btn btn-success" data-toggle="modal" data-target="#addMemberModal">Add Member</button>
     </div>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
+          <th>Name</th>
+          <th>Last Name</th>
           <th>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filtrar por Plan
+                Filter by Plan
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#" onclick="filterByPlan('Plan A')">Plan A</a>
                 <a class="dropdown-item" href="#" onclick="filterByPlan('Plan B')">Plan B</a>
-                <a class="dropdown-item" href="#" onclick="resetPlanFilter()">Mostrar Todos</a>
+                <a class="dropdown-item" href="#" onclick="resetPlanFilter()">Show All</a>
               </div>
             </div>
           </th>
           <th>Email</th>
-          <th>Acciones</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
           <td>Juan</td>
-          <td>Pérez</td>
+          <td>Perez</td>
           <td>Plan A</td>
           <td>juan@example.com</td>
           <td>
-            <button class="btn btn-primary btn-sm">Editar</button>
-            <button class="btn btn-danger btn-sm">Eliminar</button>
+            <button class="btn btn-primary btn-sm" onclick="showEditForm(this)">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmation(this)">Delete</button>
           </td>
         </tr>
         <tr>
           <td>2</td>
           <td>Juan</td>
-          <td>Pérez</td>
+          <td>Perez</td>
           <td>Plan B</td>
           <td>juan@example.com</td>
           <td>
-            <button class="btn btn-primary btn-sm">Editar</button>
-            <button class="btn btn-danger btn-sm">Eliminar</button>
+            <button class="btn btn-primary btn-sm" onclick="showEditForm(this)">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="showDeleteConfirmation(this)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Agregar miembro -->
-
-  <div class="modal fade" id="agregarMiembroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- Add member modal -->
+  <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar Miembro</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title" id="exampleModalLabel">Add Member</h5>
         </div>
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="nombre">Nombre</label>
-              <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+              <label for="nombre">Name</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Name">
             </div>
             <div class="form-group">
-              <label for="apellido">Apellido</label>
-              <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+              <label for="apellido">Last Name</label>
+              <input type="text" class="form-control" id="apellido" placeholder="Last Name">
             </div>
             <div class="form-group">
               <label for="plan">Plan</label>
@@ -140,8 +137,9 @@
               <label for="email">Email</label>
               <input type="email" class="form-control" id="email" placeholder="Email">
             </div>
-            <div class="text-center mt-3"> <!-- Se añade un margen superior -->
-              <button type="submit" class="btn btn-primary">Guardar</button>
+            <div class="text-center mt-3">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" onclick="addMember()">Save</button>
             </div>
           </form>
         </div>
@@ -149,19 +147,112 @@
     </div>
   </div>
 
+  <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Member</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="nombre">Name</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="apellido">Last Name</label>
+              <input type="text" class="form-control" id="apellido" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+              <label for="plan">Plan</label>
+              <select class="form-control" id="plan">
+                <option>Plan A</option>
+                <option>Plan B</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Email">
+            </div>
+            <div class="text-center mt-3">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary" onclick="addMember()">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Edit member form -->
+  <div class="modal fade" id="editMemberModal" tabindex="-1" role="dialog" aria-labelledby="editMemberModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editMemberModalLabel">Edit Member</h5>
+        </div>
+        <div class="modal-body">
+          <form>
+            <input type="hidden" id="memberId">
+            <div class="form-group">
+              <label for="editName">Name</label>
+              <input type="text" class="form-control" id="editName" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="editLastName">Last Name</label>
+              <input type="text" class="form-control" id="editLastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+              <label for="editPlan">Plan</label>
+              <select class="form-control" id="editPlan">
+                <option>Plan A</option>
+                <option>Plan B</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="editEmail">Email</label>
+              <input type="email" class="form-control" id="editEmail" placeholder="Email">
+            </div>
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary" onclick="saveChanges()">Save Changes</button>
+              <button type="button" class="btn btn-secondary ml-2" onclick="closeEditModal()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Delete confirmation modal -->
+  <div class="modal fade" id="deleteMemberModal" tabindex="-1" role="dialog" aria-labelledby="deleteMemberModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteMemberModalLabel">Warning!</h5>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this member?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeWarningModal()">Cancel</button>
+          <button type="button" class="btn btn-danger" onclick="deleteMember()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Filtro por planes -->
-
   <script>
     function filterByPlan(plan) {
       $('table tbody tr').each(function () {
-        var planTexto = $(this).find('td:eq(3)').text().trim();
-        if (plan === "Mostrar Todos") {
+        var planText = $(this).find('td:eq(3)').text().trim();
+        if (plan === "Show All") {
           $(this).show();
         } else {
-          if (planTexto !== plan) {
+          if (planText !== plan) {
             $(this).hide();
           } else {
             $(this).show();
@@ -173,11 +264,55 @@
     function resetPlanFilter() {
       $('table tbody tr').show();
     }
+
+    function showEditForm(btn) {
+      var row = $(btn).closest('tr');
+      var id = row.find('td:eq(0)').text().trim();
+      var name = row.find('td:eq(1)').text().trim();
+      var lastName = row.find('td:eq(2)').text().trim();
+      var plan = row.find('td:eq(3)').text().trim();
+      var email = row.find('td:eq(4)').text().trim();
+
+      $('#memberId').val(id);
+      $('#editName').val(name);
+      $('#editLastName').val(lastName);
+      $('#editPlan').val(plan);
+      $('#editEmail').val(email);
+
+      $('#editMemberModal').modal('show');
+    }
+
+    function saveChanges() {
+      var id = $('#memberId').val();
+      var name = $('#editName').val();
+      var lastName = $('#editLastName').val();
+      var plan = $('#editPlan').val();
+      var email = $('#editEmail').val();
+
+      $('#editMemberModal').modal('hide');
+    }
+
+    function closeEditModal() {
+      $('#editMemberModal').modal('hide');
+    }
+
+    function showDeleteConfirmation(btn) {
+      $('#deleteMemberModal').modal('show');
+    }
+
+    function deleteMember() {
+      $('#deleteMemberModal').modal('hide');
+    }
+
+    function closeWarningModal() {
+      $('#deleteMemberModal').modal('hide');
+    }
   </script>
 
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 
   <!-- Core JS -->
   <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
