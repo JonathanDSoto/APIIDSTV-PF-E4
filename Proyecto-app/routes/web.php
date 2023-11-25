@@ -1,13 +1,21 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
+
+/////////////////////////// User Routes ///////////////////////////
+Route::get('/users', [UsersController::class, 'index']);
+Route::post('/users/create', [UsersController::class, 'create']);
+Route::get('/users', [UsersController::class, 'store']);
+Route::get('/users/{id}', [UsersController::class, 'show']);
+Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
+Route::put('/users/{id}', [UsersController::class, 'update']);
+Route::delete('/users/{id}', [UsersController::class, 'destroy']);
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('login');
 })->name('login');
 
