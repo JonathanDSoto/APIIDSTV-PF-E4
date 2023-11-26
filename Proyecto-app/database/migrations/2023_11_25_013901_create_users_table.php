@@ -7,17 +7,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('users')) {
-            Schema::create('users', function (Blueprint $table) {
-                $table->id();
-                $table->string('name', 100);
-                $table->string('lastname', 100);
-                $table->string('email', 255);
-                $table->string('password', 255);
-                $table->integer('roll');
-                $table->timestamps();
-            });
-        }
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 100);
+            $table->string('lastname', 100);
+            $table->string('email', 255);
+            $table->string('password', 255);
+            $table->integer('roll');
+            $table->timestamps();
+        });
     }
 
     public function down(): void

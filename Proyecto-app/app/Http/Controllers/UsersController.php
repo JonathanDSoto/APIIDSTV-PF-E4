@@ -14,7 +14,12 @@ class UsersController extends Controller
         // return view('users.index', ['users' => $users]);
     }
 
-    public function create(Request $request)
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:100',
@@ -36,11 +41,6 @@ class UsersController extends Controller
         $user->save();
 
         return redirect('/users');
-    }
-
-    public function store()
-    {
-        return view('users.store');
     }
 
     public function show(string $id)
