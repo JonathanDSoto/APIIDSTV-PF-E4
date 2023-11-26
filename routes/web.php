@@ -4,6 +4,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RatesController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\AssistancesController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -32,6 +33,14 @@ Route::post('/payments/create', [PaymentsController::class, 'create']);
 Route::get('/payments/{id}', [PaymentsController::class, 'show']);
 Route::put('/payments/{id}', [PaymentsController::class, 'update']);
 Route::delete('/payments/{id}', [PaymentsController::class, 'destroy']);
+
+/////////////////////////// Assistance Routes ///////////////////////////
+Route::get('/assistances', [AssistancesController::class, 'index']);
+Route::post('/assistances/create', [AssistancesController::class, 'create']);
+Route::get('/assistances/{id}', [AssistancesController::class, 'show']);
+Route::put('/assistances/{id}', [AssistancesController::class, 'update']);
+Route::delete('/assistances/{id}', [AssistancesController::class, 'destroy']);
+
 
 Route::get('/', function () {
     return view('welcome');

@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             RateSeeder::class,
             ClientSeeder::class,
             PaymentSeeder::class,
+            AssistanceSeeder::class,
         ]);
     }
 }
