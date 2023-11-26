@@ -14,12 +14,7 @@ class UsersController extends Controller
         // return view('users.index', ['users' => $users]);
     }
 
-    public function create()
-    {
-        return view('users.create');
-    }
-
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:100',
@@ -48,12 +43,6 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         return $user;
         // return view('users.show', ['user' => $user]);
-    }
-
-    public function edit(string $id)
-    {
-        $user = User::findOrFail($id);
-        return view('users.edit', ['user' => $user]);
     }
 
     public function update(Request $request, string $id)

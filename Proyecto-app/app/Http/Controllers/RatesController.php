@@ -13,12 +13,7 @@ class RatesController extends Controller
         // return view('rates.index', ['rates' => $rates]);
     }
 
-    public function create()
-    {
-        return view('rates.create');
-    }
-
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:46',
@@ -40,12 +35,6 @@ class RatesController extends Controller
         $rate = Rate::findOrFail($id);
         return $rate;
         // return view('rates.index', ['rate' => $rate]);
-    }
-
-    public function edit(string $id)
-    {
-        $rate = Rate::findOrFail($id);
-        return view('rates.edit', ['rate' => $rate]);
     }
 
     public function update(Request $request, string $id)
