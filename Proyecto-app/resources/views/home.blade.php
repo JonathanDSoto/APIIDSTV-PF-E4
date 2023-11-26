@@ -62,146 +62,140 @@
 
   @include('layouts.sidebar')
 
-
-
   <div class="container mt-4">
-  <h2>Registro de Asistencia</h2>
-  <div class="row">
-    <div class="col-md-6">
-      <form id="buscarMiembro">
-        <div class="form-group">
-          <label for="idMiembro">Buscar por ID:</label>
-          <input type="text" class="form-control" id="idMiembro" placeholder="Ingresa el ID del miembro">
+    <h2>Attendance Record</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <form id="searchMember">
+          <div class="form-group">
+            <label for="memberName">Search by Name:</label>
+            <input type="text" class="form-control" id="memberName" placeholder="Enter member's name and Lastname">
+          </div>
+          <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <div id="searchResult"></div>
+        <button class="btn btn-info mt-3" id="dailyAttendance" data-toggle="modal" data-target="#attendanceModal">Today's Attendance</button>
+        <button class="btn btn-secondary mt-3" id="showAll">Show All Users</button>
+      </div>
+    </div>
+    <hr>
+    <h3>Member Information</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Lastname</th>
+          <th>Plan</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-id="1">
+          <td>1</td>
+          <td>Carlos</td>
+          <td>González</td>
+          <td>Premium Plan</td>
+          <td>carlos@example.com</td>
+          <td><button class="btn btn-success registerAttendance">Register Attendance</button></td>
+        </tr>
+        <tr data-id="2">
+          <td>2</td>
+          <td>Laura</td>
+          <td>Hernández</td>
+          <td>Basic Plan</td>
+          <td>laura@example.com</td>
+          <td><button class="btn btn-success registerAttendance">Register Attendance</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="modal fade" id="attendanceModal" tabindex="-1" role="dialog" aria-labelledby="attendanceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document"> 
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="attendanceModalLabel">Today's Attendance</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <button type="submit" class="btn btn-primary">Buscar</button>
-      </form>
-      <div id="resultadoBusqueda"></div>
-      <button class="btn btn-info mt-3" id="asistenciasDia" data-toggle="modal" data-target="#modalAsistencias">Asistencias del Día</button>
-      <button class="btn btn-secondary mt-3" id="mostrarTodos">Mostrar Todos los Usuarios</button>
-    </div>
-  </div>
-  <hr>
-  <h3>Información del Miembro</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Plan</th>
-        <th>Email</th>
-        <th>Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-id="1">
-        <td>1</td>
-        <td>Carlos</td>
-        <td>González</td>
-        <td>Plan Premium</td>
-        <td>carlos@example.com</td>
-        <td><button class="btn btn-success registrarAsistencia">Registrar Asistencia</button></td>
-      </tr>
-      <tr data-id="2">
-        <td>2</td>
-        <td>Laura</td>
-        <td>Hernández</td>
-        <td>Plan Básico</td>
-        <td>laura@example.com</td>
-        <td><button class="btn btn-success registrarAsistencia">Registrar Asistencia</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- Ventana emergente -->
-<div class="modal fade" id="modalAsistencias" tabindex="-1" role="dialog" aria-labelledby="modalAsistenciasLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document"> 
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalAsistenciasLabel">Asistencias del Día</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Plan</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody id="asistenciasBody">
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Plan</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceBody">
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<script>
-  $(document).ready(function () {
-    $('#buscarMiembro').submit(function (e) {
-      e.preventDefault();
-      var id = $('#idMiembro').val();
-      var encontrado = false;
-      $('tbody tr').each(function () {
-        var memberId = $(this).data('id').toString();
-        if (memberId === id) {
-          encontrado = true;
-          $('tbody tr').hide();
-          $(this).show();
+  <script>
+    $(document).ready(function () {
+      $('#searchMember').submit(function (e) {
+        e.preventDefault();
+        var searchTerm = $('#memberName').val().toLowerCase();
+        if (searchTerm.trim() === '') {
+          $('tbody tr').show();
+          $('#searchResult').html('');
+          return;
+        }
+        var found = false;
+        $('tbody tr').each(function () {
+          var fullName = $(this).find('td:nth-child(2)').text().toLowerCase() + ' ' + $(this).find('td:nth-child(3)').text().toLowerCase();
+          if (fullName.includes(searchTerm)) {
+            found = true;
+            $('tbody tr').hide();
+            $(this).show();
+          }
+        });
+        if (!found) {
+          $('#searchResult').html('<div class="alert alert-danger mt-3" role="alert">No member found with that name and Lastname.</div>');
+        } else {
+          $('#searchResult').html('');
         }
       });
-      if (!encontrado) {
-        $('#resultadoBusqueda').html('<div class="alert alert-danger mt-3" role="alert">No se encontró ningún miembro con ese ID.</div>');
-      } else {
-        $('#resultadoBusqueda').html('');
-      }
-    });
 
-    $('.registrarAsistencia').click(function () {
-      alert('Asistencia registrada para el miembro.');
-    });
-
-    $('#asistenciasDia').click(function () {
-      var asistenciasHTML = '';
-      $('tbody tr').each(function () {
-        var memberId = $(this).data('id').toString();
-        var nombre = $(this).find('td:nth-child(2)').text();
-        var apellido = $(this).find('td:nth-child(3)').text();
-        var plan = $(this).find('td:nth-child(4)').text();
-        var email = $(this).find('td:nth-child(5)').text();
-        asistenciasHTML += `<tr><td>${memberId}</td><td>${nombre}</td><td>${apellido}</td><td>${plan}</td><td>${email}</td></tr>`;
+      $('.registerAttendance').click(function () {
+        $(this).text('Attendance Registered').removeClass('btn-success').addClass('btn-secondary').prop('disabled', true);
       });
-      $('#asistenciasBody').html(asistenciasHTML);
+
+      $('#dailyAttendance').click(function () {
+        var attendanceHTML = '';
+        $('tbody tr').each(function () {
+          var memberId = $(this).data('id').toString();
+          var name = $(this).find('td:nth-child(2)').text();
+          var Lastname = $(this).find('td:nth-child(3)').text();
+          var plan = $(this).find('td:nth-child(4)').text();
+          var email = $(this).find('td:nth-child(5)').text();
+          attendanceHTML += `<tr><td>${memberId}</td><td>${name}</td><td>${Lastname}</td><td>${plan}</td><td>${email}</td></tr>`;
+        });
+        $('#attendanceBody').html(attendanceHTML);
+      });
+
+      $('#showAll').click(function () {
+        $('tbody tr').show();
+      });
     });
-
-    $('#mostrarTodos').click(function () {
-      $('tbody tr').show();
-    });
-  });
-</script>
-
-
-
-
-
-
-
-
-
+  </script>
 
 
   <!-- Core JS -->
