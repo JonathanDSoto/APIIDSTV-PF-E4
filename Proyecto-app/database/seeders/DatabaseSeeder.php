@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RateSeeder::class,
             ClientSeeder::class,
+            PaymentSeeder::class,
         ]);
     }
 }

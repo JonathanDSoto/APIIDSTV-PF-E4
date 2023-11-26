@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RatesController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\PaymentsController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -24,6 +25,13 @@ Route::post('/clients/create', [ClientsController::class, 'create']);
 Route::get('/clients/{id}', [ClientsController::class, 'show']);
 Route::put('/clients/{id}', [ClientsController::class, 'update']);
 Route::delete('/clients/{id}', [ClientsController::class, 'destroy']);
+
+/////////////////////////// Payment Routes ///////////////////////////
+Route::get('/payments', [PaymentsController::class, 'index']);
+Route::post('/payments/create', [PaymentsController::class, 'create']);
+Route::get('/payments/{id}', [PaymentsController::class, 'show']);
+Route::put('/payments/{id}', [PaymentsController::class, 'update']);
+Route::delete('/payments/{id}', [PaymentsController::class, 'destroy']);
 
 Route::get('/', function () {
     return view('welcome');
