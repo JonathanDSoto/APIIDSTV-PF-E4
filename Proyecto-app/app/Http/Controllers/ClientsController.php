@@ -18,13 +18,13 @@ class ClientsController extends Controller
         $validatedData = $request->validate([
             'id' => 'required|integer',
             'roll' => 'required|integer',
-            'rates_id' => 'required|integer',
+            'id_rates' => 'required|integer',
         ]);
 
         $client = new Client;
         $client->id = $request->id;
         $client->roll = $request->roll;
-        $client->rates_id = $request->rates_id;
+        $client->id_rates = $request->id_rates;
         $client->save();
 
         return redirect('/clients');
@@ -42,13 +42,13 @@ class ClientsController extends Controller
         $validatedData = $request->validate([
             'id' => 'required|integer',
             'roll' => 'required|integer',
-            'rates_id' => 'required|integer',
+            'id_rates' => 'required|integer',
         ]);
 
         $client = Client::findOrFail($id);
         $client->id = $request->id;
         $client->roll = $request->roll;
-        $client->rates_id = $request->rates_id;
+        $client->id_rates = $request->id_rates;
         $client->save();
 
         return redirect('/clients');

@@ -14,7 +14,7 @@ class ClientFactory extends Factory
     {
         return [
             'roll' => User::all()->random()->id,
-            'rates_id' => Rate::all()->random()->id,
+            'id_rates' => Rate::all()->random()->id,
         ];
     }
 }

@@ -11,7 +11,7 @@ class Client extends Model
     protected $fillable = [
         'id',
         'roll',
-        'rates_id',
+        'id_rates',
     ];
 
     public function user()
@@ -21,6 +21,6 @@ class Client extends Model
 
     public function rate()
     {
-        return $this->belongsTo(Rate::class, 'rates_id');
+        return $this->belongsTo(Rate::class, 'id_rates');
     }
 }

@@ -10,7 +10,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('roll')->constrained('users');
-            $table->foreignId('rates_id')->constrained('rates');
+            $table->foreignId('id_rates')->constrained('rates');
             $table->timestamps();
         });
     }
