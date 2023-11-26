@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RatesController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -10,6 +11,15 @@ Route::get('/users/{id}', [UsersController::class, 'show']);
 Route::get('/users/{id}/edit', [UsersController::class, 'edit']);
 Route::put('/users/{id}', [UsersController::class, 'update']);
 Route::delete('/users/{id}', [UsersController::class, 'destroy']);
+
+/////////////////////////// Rate Routes ///////////////////////////
+Route::get('/rates', [RatesController::class, 'index']);
+Route::get('/rates/create', [RatesController::class, 'create']);
+Route::post('/rates', [RatesController::class, 'store']);
+Route::get('/rates/{id}', [RatesController::class, 'show']);
+Route::get('/rates/{id}/edit', [RatesController::class, 'edit']);
+Route::put('/rates/{id}', [RatesController::class, 'update']);
+Route::delete('/rates/{id}', [RatesController::class, 'destroy']);
 
 Route::get('/', function () {
     return view('welcome');
