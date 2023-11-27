@@ -37,14 +37,14 @@ class UsersController extends Controller
 
         return redirect('/users');
     }
-
+  
     public function show(string $id)
     {
         $user = User::findOrFail($id);
         return $user;
         // return view('users.show', ['user' => $user]);
     }
-    
+
     public function client(string $id)
     {
         $client = Client::findOrFail($id);

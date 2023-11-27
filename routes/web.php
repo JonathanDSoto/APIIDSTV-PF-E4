@@ -5,6 +5,7 @@ use App\Http\Controllers\RatesController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AssistancesController;
+use App\Http\Controllers\AuthController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -73,3 +74,16 @@ Route::get('/instructors', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
+
+//Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
+
+
+//login
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
+
+//register
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
