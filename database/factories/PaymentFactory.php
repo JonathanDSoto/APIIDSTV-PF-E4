@@ -15,7 +15,7 @@ class PaymentFactory extends Factory
         return [
             'date' => $this->faker->date(),
             'id_rates' => Rate::all()->random()->id,
-            'id_clients' => Client::all()->random()->id,
+            'id_client' => Client::all()->random()->id,
         ];
     }
 }

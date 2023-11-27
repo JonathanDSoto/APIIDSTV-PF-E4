@@ -12,7 +12,7 @@ class Payment extends Model
         'id',
         'date',
         'id_rates',
-        'id_clients',
+        'id_client',
     ];
 
     public function rates()
@@ -20,8 +20,8 @@ class Payment extends Model
         return $this->belongsTo(Rate::class, 'id_rates');
     }
 
-    public function clients()
+    public function client()
     {
-        return $this->belongsTo(Client::class, 'id_clients');
+        return $this->belongsTo(Client::class, 'id_client');
     }
 }

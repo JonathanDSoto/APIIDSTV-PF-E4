@@ -11,7 +11,7 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('id_rates')->constrained('rates');
-            $table->foreignId('id_clients')->constrained('clients');
+            $table->foreignId('id_client')->constrained('clients');
             $table->timestamps();
         });
     }

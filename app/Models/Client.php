@@ -23,4 +23,9 @@ class Client extends Model
     {
         return $this->belongsTo(Rate::class, 'id_rates');
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'id_client');
+    }
 }

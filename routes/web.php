@@ -24,6 +24,8 @@ Route::delete('/rates/{id}', [RatesController::class, 'destroy']);
 Route::get('/clients', [ClientsController::class, 'index']);
 Route::post('/clients/create', [ClientsController::class, 'create']);
 Route::get('/clients/{id}', [ClientsController::class, 'show']);
+// Obtén todos los pagos de un cliente específico
+Route::get('/clients/{id}/payments', [ClientsController::class, 'payments']);
 Route::put('/clients/{id}', [ClientsController::class, 'update']);
 Route::delete('/clients/{id}', [ClientsController::class, 'destroy']);
 
@@ -31,6 +33,8 @@ Route::delete('/clients/{id}', [ClientsController::class, 'destroy']);
 Route::get('/payments', [PaymentsController::class, 'index']);
 Route::post('/payments/create', [PaymentsController::class, 'create']);
 Route::get('/payments/{id}', [PaymentsController::class, 'show']);
+// Obtén el cliente de un pago específico
+Route::get('/payments/{id}/client', [PaymentsController::class, 'client']);
 Route::put('/payments/{id}', [PaymentsController::class, 'update']);
 Route::delete('/payments/{id}', [PaymentsController::class, 'destroy']);
 
@@ -40,7 +44,6 @@ Route::post('/assistances/create', [AssistancesController::class, 'create']);
 Route::get('/assistances/{id}', [AssistancesController::class, 'show']);
 Route::put('/assistances/{id}', [AssistancesController::class, 'update']);
 Route::delete('/assistances/{id}', [AssistancesController::class, 'destroy']);
-
 
 Route::get('/', function () {
     return view('welcome');

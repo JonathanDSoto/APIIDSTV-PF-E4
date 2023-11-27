@@ -39,6 +39,14 @@ class PaymentsController extends Controller
         // return view('payments.show', ['payment' => $payment]);
     }
 
+    // Obtiene el cliente de un pago
+    public function client(string $id)
+    {
+        $payment = Payment::findOrFail($id);
+        $client = $payment->client;
+        return $client;
+    }
+
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([

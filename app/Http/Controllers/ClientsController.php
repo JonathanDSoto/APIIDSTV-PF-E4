@@ -37,6 +37,14 @@ class ClientsController extends Controller
         // return view('clients.show', ['client' => $client]);
     }
 
+    // Busca todos los pagos de un cliente
+    public function payments(string $id)
+    {
+        $client = Client::findOrFail($id);
+        $payments = $client->payments;
+        return $payments;
+    }
+
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
