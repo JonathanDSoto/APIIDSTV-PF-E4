@@ -1,7 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
 Route::post('/users/create', [UsersController::class, 'create']);
@@ -38,3 +39,8 @@ Route::get('/instructors', function () {
 Route::get('/home', function () {
     return view('home');
 })->name('home');
+
+//login routes
+Route::get('/login', [LoginController::class, 'show']);
+Route::post('/login', [LoginController::class, 'login']);
+Route::get('/home', [HomeController::class, 'inex']);
