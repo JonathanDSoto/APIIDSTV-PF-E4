@@ -14,11 +14,6 @@ class Client extends Model
         'id_rates',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'roll');
-    }
-
     public function rate()
     {
         return $this->belongsTo(Rate::class, 'id_rates');

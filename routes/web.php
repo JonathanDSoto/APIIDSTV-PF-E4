@@ -10,6 +10,7 @@ use App\Http\Controllers\AssistancesController;
 Route::get('/users', [UsersController::class, 'index']);
 Route::post('/users/create', [UsersController::class, 'create']);
 Route::get('/users/{id}', [UsersController::class, 'show']);
+Route::get('/users/{id}/client', [UsersController::class, 'client']);
 Route::put('/users/{id}', [UsersController::class, 'update']);
 Route::delete('/users/{id}', [UsersController::class, 'destroy']);
 

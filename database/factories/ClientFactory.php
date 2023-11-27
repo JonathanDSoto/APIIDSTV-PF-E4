@@ -2,7 +2,6 @@
 namespace Database\Factories;
 
 use App\Models\Client;
-use App\Models\User;
 use App\Models\Rate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -13,7 +12,6 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            'roll' => User::all()->random()->id,
             'id_rates' => Rate::all()->random()->id,
         ];
     }

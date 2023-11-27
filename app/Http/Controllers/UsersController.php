@@ -44,6 +44,13 @@ class UsersController extends Controller
         return $user;
         // return view('users.show', ['user' => $user]);
     }
+    
+    public function client(string $id)
+    {
+        $client = Client::findOrFail($id);
+        return $client;
+        // return view('users.show', ['user' => $user]);
+    }
 
     public function update(Request $request, string $id)
     {

@@ -9,7 +9,7 @@ class PaymentSeeder extends Seeder
     public function run(): void
     {
         Payment::factory()
-        ->count(25)
+        ->count(100)
         ->create();
     }
 }
