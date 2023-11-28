@@ -1,11 +1,9 @@
 <?php
 namespace Database\Factories;
 
-use App\Models\User;
-use App\Models\Client;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class UserFactory extends Factory
 {
@@ -14,12 +12,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'id_client' => Client::all()->random()->id,
             'name' => $this->faker->name,
-            'lastname' => $this->faker->lastName,
+            'last_name' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,
-            'password' => Hash::make('#0¿4!IxU'),
-            'roll' => $this->faker->numberBetween(1, 2),
+            'password' => '#0¿4!IxU',
         ];
     }
 }

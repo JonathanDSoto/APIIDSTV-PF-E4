@@ -16,17 +16,15 @@ class PaymentsController extends Controller
     public function create(Request $request)
     {
         $validatedData = $request->validate([
-            'id' => 'required|integer',
+            'memberships_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'date' => 'required|date',
-            'id_rates' => 'required|integer',
-            'id_clients' => 'required|integer',
         ]);
 
         $payment = new Payment;
-        $payment->id = $request->id;
+        $payment->memberships_id = $request->memberships_id;
+        $payment->user_id = $request->user_id;
         $payment->date = $request->date;
-        $payment->id_rates = $request->id_rates;
-        $payment->id_clients = $request->id_clients;
         $payment->save();
 
         return redirect('/payments');
@@ -39,28 +37,25 @@ class PaymentsController extends Controller
         // return view('payments.show', ['payment' => $payment]);
     }
 
-    // Obtiene el cliente de un pago
-    public function client(string $id)
+    public function paymentsByUser(string $user_Id)
     {
-        $payment = Payment::findOrFail($id);
-        $client = $payment->client;
-        return $client;
+        $payments = Payment::where('user_id', $user_Id)->get();
+        return $payments;
+        // return view('payments.byUser', ['payments' => $payments]);
     }
 
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'id' => 'required|integer',
+            'memberships_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'date' => 'required|date',
-            'id_rates' => 'required|integer',
-            'id_clients' => 'required|integer',
         ]);
 
         $payment = Payment::findOrFail($id);
-        $payment->id = $request->id;
+        $payment->memberships_id = $request->memberships_id;
+        $payment->user_id = $request->user_id;
         $payment->date = $request->date;
-        $payment->id_rates = $request->id_rates;
-        $payment->id_clients = $request->id_clients;
         $payment->save();
 
         return redirect('/payments');

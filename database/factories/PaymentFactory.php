@@ -1,10 +1,10 @@
 <?php
 namespace Database\Factories;
 
-use App\Models\Payment;
-use App\Models\Client;
-use App\Models\Rate;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Payment;
+use App\Models\Membership;
+use App\Models\User;
 
 class PaymentFactory extends Factory
 {
@@ -14,8 +14,8 @@ class PaymentFactory extends Factory
     {
         return [
             'date' => $this->faker->date(),
-            'id_rates' => Rate::all()->random()->id,
-            'id_client' => Client::all()->random()->id,
+            'memberships_id' => Membership::all()->random()->id,
+            'user_id' => User::all()->random()->id,
         ];
     }
 }

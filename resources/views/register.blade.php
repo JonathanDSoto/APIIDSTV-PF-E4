@@ -7,7 +7,7 @@
 
 <h1>Registro</h1>
 
-<form method="POST" action="{{ route('register.submit') }}">
+<form method="POST" action="/client/create">
     @csrf
 
     <label for="name">Nombre:</label><br>
