@@ -9,19 +9,18 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
+        'memberships_id',
+        'user_id',
         'date',
-        'id_rates',
-        'id_client',
     ];
 
-    public function rates()
+    public function membership()
     {
-        return $this->belongsTo(Rate::class, 'id_rates');
+        return $this->belongsTo(Membership::class, 'memberships_id');
     }
-
-    public function client()
+    
+    public function user()
     {
-        return $this->belongsTo(Client::class, 'id_client');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

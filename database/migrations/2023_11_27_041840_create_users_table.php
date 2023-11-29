@@ -5,22 +5,20 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-    public function up(): void
+    public function up()
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_client')->constrained('clients');
             $table->string('name', 100);
-            $table->string('lastname', 100);
-            $table->string('email', 255);
-            $table->string('password', 255);
-            $table->integer('roll');
+            $table->string('last_name', 100);
+            $table->string('email', 320)->unique();
+            $table->string('password', 64);
             $table->timestamps();
         });
     }
 
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('users');
     }
-};
+}

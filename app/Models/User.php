@@ -2,18 +2,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
-        'id_client',
         'name',
-        'lastname',
+        'last_name',
         'email',
         'password',
     ];
@@ -25,9 +22,4 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
-  
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'id_client');
-    }
 }
