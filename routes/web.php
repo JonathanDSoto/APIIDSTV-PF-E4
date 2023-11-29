@@ -6,6 +6,8 @@ use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\AssistancesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -48,10 +50,6 @@ Route::put('/assistances/{id}', [AssistancesController::class, 'update']);
 Route::delete('/assistances/{id}', [AssistancesController::class, 'destroy']);
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/login', function () {
     return view('login');
 })->name('login');
 
@@ -75,15 +73,20 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-//Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
+Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
 
 
-//login
+//Login
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 
-//register
+//Register
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
+//Home 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [SearchController::class, 'search']);
+

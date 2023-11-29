@@ -18,8 +18,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name,
             'lastname' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,
-            'password' => Hash::make('#0¿4!IxU'),
-            'roll' => $this->faker->numberBetween(1, 2),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
         ];
     }
 }
