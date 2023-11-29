@@ -2,6 +2,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -48,4 +50,12 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 //Register
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
+//Home 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+Route::get('/search', [SearchController::class, 'search']);
+
+
 
