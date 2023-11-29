@@ -13,10 +13,6 @@ Route::put('/users/{id}', [UsersController::class, 'update']);
 Route::delete('/users/{id}', [UsersController::class, 'destroy']);
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/login', function () {
     return view('login');
 })->name('login');
 
@@ -40,15 +36,16 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-//Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
+Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
 
 
-//login
+//Login
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 
-//register
+//Register
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+

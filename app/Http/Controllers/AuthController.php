@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Str;
+//Todo lo realcionado con el login y el register
 
 class AuthController extends Controller
-{
+{   
+    //Login
     public function showLoginForm()
     {
         return view('login');
@@ -37,7 +39,8 @@ class AuthController extends Controller
         // Autenticación fallida
         return redirect()->back()->withInput()->withErrors(['email' => 'Credenciales inválidas']);
     }
-
+    
+    //Register
     public function showRegistrationForm()
     {
         return view('register');
@@ -49,12 +52,16 @@ class AuthController extends Controller
         'name' => 'required|max:255',
         'lastname' => 'required|max:255',
         'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6',
+        'password' => 'required|min:6|max:10',
+    ], [
+        'password.required' => 'La contraseña es obligatoria.',
+        'password.min' => 'La contraseña debe tener al menos :min caracteres.',
+        'password.max' => 'La contraseña no puede exceder los :max caracteres.',
     ]);
 
     $user = new User();
     $user->name = $validatedData['name'];
-    $user->lastname = $validatedData['lastname']; // Campo de apellido
+    $user->lastname = $validatedData['lastname'];
     $user->email = $validatedData['email'];
     $user->password = Hash::make($validatedData['password']);
     $user->save();
