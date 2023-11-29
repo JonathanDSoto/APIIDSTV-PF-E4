@@ -1,44 +1,55 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\MembershipsController;
+use App\Http\Controllers\RatesController;
+use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\AssistancesController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SearchController;
 
 /////////////////////////// User Routes ///////////////////////////
-Route::get('/users', [UsersController::class, 'index']); // Obtiene todos los usuarios
-Route::get('/users/create', [UsersController::class, 'create']); // Redirige a la view del formulario
-Route::post('/users', [UsersController::class, 'store']); // Recibe los parámetros del usuario para crearlo
-Route::get('/users/{id}', [UsersController::class, 'show']); // Obtiene un usuario por su id
-Route::get('/users/{id}/edit', [UsersController::class, 'edit']); // Redirige a la view del formulario
-Route::put('/users/{id}', [UsersController::class, 'update']); // Recibe los parámetros del usuario para actualizarlos
-Route::delete('/users/{id}', [UsersController::class, 'destroy']); // Elimina a un usuario por si id
+Route::get('/users', [UsersController::class, 'index']);
+Route::post('/users/create', [UsersController::class, 'create']);
+Route::get('/users/{id}', [UsersController::class, 'show']);
+Route::get('/users/{id}/client', [UsersController::class, 'client']);
+Route::put('/users/{id}', [UsersController::class, 'update']);
+Route::delete('/users/{id}', [UsersController::class, 'destroy']);
 
-/////////////////////////// Memberships Routes ///////////////////////////
-Route::get('/memberships', [MembershipsController::class, 'index']);
-Route::get('/memberships/create', [MembershipsController::class, 'create']);
-Route::post('/memberships', [MembershipsController::class, 'store']);
-Route::get('/memberships/{id}', [MembershipsController::class, 'show']);
-Route::get('/memberships/{id}/edit', [MembershipsController::class, 'edit']);
-Route::put('/memberships/{id}', [MembershipsController::class, 'update']);
-Route::delete('/memberships/{id}', [MembershipsController::class, 'destroy']);
+/////////////////////////// Rate Routes ///////////////////////////
+Route::get('/rates', [RatesController::class, 'index']);
+Route::get('/rates/create', [RatesController::class, 'create']);
+Route::get('/rates/{id}', [RatesController::class, 'show']);
+Route::put('/rates/{id}', [RatesController::class, 'update']);
+Route::delete('/rates/{id}', [RatesController::class, 'destroy']);
 
-/////////////////////////// Payments Routes ///////////////////////////
+/////////////////////////// Client Routes ///////////////////////////
+Route::get('/clients', [ClientsController::class, 'index']);
+Route::post('/clients/create', [ClientsController::class, 'create']);
+Route::get('/clients/{id}', [ClientsController::class, 'show']);
+// Obtén todos los pagos de un cliente específico
+Route::get('/clients/{id}/payments', [ClientsController::class, 'payments']);
+Route::put('/clients/{id}', [ClientsController::class, 'update']);
+Route::delete('/clients/{id}', [ClientsController::class, 'destroy']);
+
+/////////////////////////// Payment Routes ///////////////////////////
 Route::get('/payments', [PaymentsController::class, 'index']);
-Route::get('/payments/create', [PaymentsController::class, 'create']);
-Route::post('/payments', [PaymentsController::class, 'store']);
-Route::get('/payments/{payment}', [PaymentsController::class, 'show']);
-// Busca todos los pagos de unn usuario
-Route::get('/payments/{user}/user', [PaymentsController::class, 'paymentsByUser']);
-Route::get('/payments/{payment}/edit', [PaymentsController::class, 'edit']);
-Route::put('/payments/{payment}', [PaymentsController::class, 'update']);
-Route::delete('/payments/{payment}', [PaymentsController::class, 'destroy']);
+Route::post('/payments/create', [PaymentsController::class, 'create']);
+Route::get('/payments/{id}', [PaymentsController::class, 'show']);
+// Obtén el cliente de un pago específico
+Route::get('/payments/{id}/client', [PaymentsController::class, 'client']);
+Route::put('/payments/{id}', [PaymentsController::class, 'update']);
+Route::delete('/payments/{id}', [PaymentsController::class, 'destroy']);
+
+/////////////////////////// Assistance Routes ///////////////////////////
+Route::get('/assistances', [AssistancesController::class, 'index']);
+Route::post('/assistances/create', [AssistancesController::class, 'create']);
+Route::get('/assistances/{id}', [AssistancesController::class, 'show']);
+Route::put('/assistances/{id}', [AssistancesController::class, 'update']);
+Route::delete('/assistances/{id}', [AssistancesController::class, 'destroy']);
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/login', function () {
     return view('login');
 })->name('login');
 
@@ -62,15 +73,20 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-//Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
+Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
 
 
-//login
+//Login
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 
-//register
+//Register
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
+//Home 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [SearchController::class, 'search']);
+

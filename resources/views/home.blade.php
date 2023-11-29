@@ -1,235 +1,259 @@
-<!DOCTYPE html>
+</html>
 
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr"
-  data-theme="theme-default" data-assets-path="../../assets/" data-template="vertical-menu-template">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <!-- Agrega los enlaces a Bootstrap u otros estilos si es necesario -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Enlace a FontAwesome para el ícono de búsqueda -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
   <title>Home</title>
+  <style>
+    body {
+      background-color: #1C1C1C;
+    }
 
+    /* Cambiar el color del texto y los títulos a blanco */
+    h1,
+    label,
+    .form-control,
+    th,
+    td {
+      color: #F1CCBA;
+    }
 
+    /* Cambiar el color del botón de búsqueda */
+    #searchButton {
+      background-color: #F1CCBA;
+      border-color: #F1CCBA;
+    }
 
+    /* Cambiar el color del ícono del botón de búsqueda */
+    #searchButton i {
+      color: white;
+    }
 
+    .table {
+      border-collapse: collapse;
+    }
 
+    .table th,
+    .table td {
+      border: none;
+      padding: 10px;
+      text-align: left;
 
-  <!-- Favicon -->
+    }
 
+    /* Eliminar las líneas entre los registros de usuario */
+    .table tr {
+      border: none;
+    }
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;ampdisplay=swap"
-    rel="stylesheet">
+    .table tr:nth-child(even) {
+      background-color: #222222;
+    }
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-  <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
-  <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+    #sidebar1 {
+      background: #222222;
+      text-align: center;
+      font-weight: bold;
+      animation: slideInFromLeft 1s ease-in-out forwards;
+      /* Aplicar animación desde la izquierda */
+    }
 
-  <!-- Core CSS -->
-  <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="../../assets/css/demo.css" />
+    /*Barra buscadora*/
+    .form-control {
+      border-radius: 10px;
+      /* Cambia la forma del borde del input */
+      border: 1px solid #F1CCBA;
+      /* Cambia el color del borde */
+      background-color: rgba(241, 204, 186, 0);
+      /* Cambia el color de fondo con transparencia */
+      color: rgb(255, 255, 255);
+      /* Cambia el color del texto */
+      box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+      /* Cambiar la sombra al pasar el ratón */
+      background-color: transparent;
+    }
 
-  <!-- Vendors CSS -->
-  <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css">
-  <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
-  <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
+    /*Estilos para quitar lo feo del autocompletado*/
+    #searchInput:focus {
+      background-color: transparent;
+      outline: none;
+      box-shadow: none;
+      border-color: #F1CCBA;
+      color: white;
+    }
 
-  <!-- Page CSS -->
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
 
+    ::-webkit-scrollbar-thumb {
+      background: #333333;
+      border-radius: 25px;
+    }
 
-  <!-- Helpers -->
-  <script src="../../assets/vendor/js/helpers.js"></script>
-  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-  <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="../../assets/js/config.js"></script>
+    /* Animación para la barra lateral desde la izquierda */
+    @keyframes slideInFromLeft {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
 
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Animación para el título h1 desde arriba */
+    @keyframes slideInFromTop {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    h1 {
+      animation: slideInFromTop 1s ease-in-out forwards;
+    }
+
+    @keyframes square-in-hesitate {
+      0% {
+        clip-path: inset(100% 100% 100% 100%);
+      }
+
+      40% {
+        clip-path: inset(33% 33% 33% 33%);
+      }
+
+      100% {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    [transition-style="in:square:hesitate"] {
+      animation: 2.5s cubic-bezier(.25, 1, .30, 1) square-in-hesitate both;
+    }
+  </style>
 </head>
 
 <body>
-
-
-  @include('layouts.sidebar')
-
-  <div class="container mt-4">
-    <h2>Attendance Record</h2>
+  <!-- Div de cuerpo -->
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
-        <form id="searchMember">
-          <div class="form-group">
-            <label for="memberName">Search by Name:</label>
-            <input type="text" class="form-control" id="memberName" placeholder="Enter member's name and Lastname">
+      <!--Side bar-->
+      <div class="d-none d-lg-block col-sm-auto sticky-top" id="sidebar1">
+        <ul class="nav flex-column" id="sidebarNav">
+          <li class="nav-item">
+            <a href="/home" id="homeLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="dashboardLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+              Members
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="ordersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+              Classes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="productsLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+              Memberships
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="customersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+              Instructors
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" id="customersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+              Assistance
+            </a>
+          </li>
+          <li class="nav-item mt-auto">
+            <a href="/" id="logoutLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="bottom-end" data-bs-original-title="LogOut">
+              LogOut
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!--Final de la sidebar-->
+
+      <!-- Contenido Principal de la base de datos -->
+      <div class="col-sm p-5 min-vh-100">
+        <h1 class="text-center">Attendance Record</h1>
+        <!--Barra de busqueda-->
+        <div class="input-group">
+          <input type="search" id="searchInput" class="form-control" placeholder="Search" /><label class="form-label" for="searchInput">&nbsp;</label>
+          <div class="input-group-append">
+            <button type="button" id="searchButton" class="btn btn-primary rounded-circle">
+              <i class="fas fa-search"></i>
+            </button>
           </div>
-          <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-        <div id="searchResult"></div>
-        <button class="btn btn-info mt-3" id="dailyAttendance" data-toggle="modal" data-target="#attendanceModal">Today's Attendance</button>
-        <button class="btn btn-secondary mt-3" id="showAll">Show All Users</button>
-      </div>
-    </div>
-    <hr>
-    <h3>Member Information</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Lastname</th>
-          <th>Plan</th>
-          <th>Email</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr data-id="1">
-          <td>1</td>
-          <td>Carlos</td>
-          <td>González</td>
-          <td>Premium Plan</td>
-          <td>carlos@example.com</td>
-          <td><button class="btn btn-success registerAttendance">Register Attendance</button></td>
-        </tr>
-        <tr data-id="2">
-          <td>2</td>
-          <td>Laura</td>
-          <td>Hernández</td>
-          <td>Basic Plan</td>
-          <td>laura@example.com</td>
-          <td><button class="btn btn-success registerAttendance">Register Attendance</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        </div>
 
-  <!-- Popup Modal -->
-  <div class="modal fade" id="attendanceModal" tabindex="-1" role="dialog" aria-labelledby="attendanceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document"> 
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="attendanceModalLabel">Today's Attendance</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Lastname</th>
-                <th>Plan</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody id="attendanceBody">
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+        <!--Tabla-->
+        <!-- Cambia la tabla original para que tenga una clase -->
+        <table class="table" id="originalTable" style="width: 100%;" transition-style="in:square:hesitate">
+          <tr>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Email</th>
+          </tr>
+          <tbody>
+            @foreach ($users as $user)
+            <tr data-id="{{ $user->id }}" class="search-result">
+              <td>{{ $user->name }}</td>
+              <td>{{ $user->lastname }}</td>
+              <td>{{ $user->email }}</td>
+              <td><button class="btn btn-success registerAttendance">Register Attendance</button></td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
+      <!--Final de la tabla-->
     </div>
   </div>
+  </div>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const originalTable = document.getElementById('originalTable');
+    const rows = originalTable.querySelectorAll('.search-result');
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    searchInput.addEventListener('input', function() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
 
-  <script>
-    $(document).ready(function () {
-      $('#searchMember').submit(function (e) {
-        e.preventDefault();
-        var searchTerm = $('#memberName').val().toLowerCase();
-        if (searchTerm.trim() === '') {
-          $('tbody tr').show();
-          $('#searchResult').html('');
-          return;
-        }
-        var found = false;
-        $('tbody tr').each(function () {
-          var fullName = $(this).find('td:nth-child(2)').text().toLowerCase() + ' ' + $(this).find('td:nth-child(3)').text().toLowerCase();
-          if (fullName.includes(searchTerm)) {
-            found = true;
-            $('tbody tr').hide();
-            $(this).show();
-          }
-        });
-        if (!found) {
-          $('#searchResult').html('<div class="alert alert-danger mt-3" role="alert">No member found with that name and Lastname.</div>');
+      rows.forEach(row => {
+        const name = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+        const lastname = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+        const email = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+        if (name.includes(searchTerm) || lastname.includes(searchTerm) || email.includes(searchTerm)) {
+          row.style.display = 'table-row'; // Mostrar la fila si coincide con la búsqueda
         } else {
-          $('#searchResult').html('');
+          row.style.display = 'none'; // Ocultar la fila si no coincide con la búsqueda
         }
-      });
-
-      $('.registerAttendance').click(function () {
-        $(this).text('Attendance Registered').removeClass('btn-success').addClass('btn-secondary').prop('disabled', true);
-      });
-
-      $('#dailyAttendance').click(function () {
-        var attendanceHTML = '';
-        $('tbody tr').each(function () {
-          var memberId = $(this).data('id').toString();
-          var name = $(this).find('td:nth-child(2)').text();
-          var Lastname = $(this).find('td:nth-child(3)').text();
-          var plan = $(this).find('td:nth-child(4)').text();
-          var email = $(this).find('td:nth-child(5)').text();
-          attendanceHTML += `<tr><td>${memberId}</td><td>${name}</td><td>${Lastname}</td><td>${plan}</td><td>${email}</td></tr>`;
-        });
-        $('#attendanceBody').html(attendanceHTML);
-      });
-
-      $('#showAll').click(function () {
-        $('tbody tr').show();
       });
     });
-  </script>
-
-
-  <!-- Core JS -->
-  <!-- build:js assets/vendor/js/core.js -->
-
-  <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="../../assets/vendor/libs/popper/popper.js"></script>
-  <script src="../../assets/vendor/js/bootstrap.js"></script>
-  <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
-  <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-  <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-  <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-  <script src="../../assets/vendor/js/menu.js"></script>
-
-  <!-- endbuild -->
-
-  <!-- Vendors JS -->
-  <script src="../../assets/vendor/libs/moment/moment.js"></script>
-  <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-  <script src="../../assets/vendor/libs/select2/select2.js"></script>
-  <script src="../../assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-  <script src="../../assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-  <script src="../../assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-  <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
-  <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-
-  <!-- Main JS -->
-  <script src="../../assets/js/main.js"></script>
-
-
-  <!-- Page JS -->
-  <script src="../../assets/js/app-user-list.js"></script>
-
-</body>
+  });
+</script>
 
 </html>

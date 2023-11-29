@@ -1,22 +1,45 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Iniciar sesión</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet">
+    <!-- Agrega los enlaces a Bootstrap u otros estilos si es necesario -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
 
-<h1>Iniciar sesión</h1>
+<body style="background-color: #1C1C1C;">
 
-<form method="POST" action="{{ route('login.submit') }}">
-    @csrf
+    <div class="bg text-center">
+        <div class="centered">
 
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email"><br><br>
+            <p class="firstLine"> L &nbsp;&nbsp;&nbsp; O &nbsp;&nbsp;&nbsp; G &nbsp;&nbsp;&nbsp; I &nbsp;&nbsp;&nbsp; N </p>
 
-    <label for="password">Contraseña:</label><br>
-    <input type="password" id="password" name="password"><br><br>
+            <p class="secondLine">&nbsp;&nbsp;&nbsp;</p>
 
-    <input type="submit" value="Iniciar sesión">
-</form>
+            <form class="login-form" method="POST" action="{{ route('login.submit') }}">
+                @csrf
 
+                <div class="form-group">
+                    <input type="email" class="form-control CustomInput" id="email" name="email" placeholder="Email" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" class="form-control CustomInput" id="password" name="password" placeholder="Password" autocomplete="off">
+                    <p class="secondLine">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="redirectText"><a href="{{ route('register') }}">Register here</a></p>
+                </div>
+
+                <p class="secondLine">&nbsp;&nbsp;&nbsp;</p>
+                <button type="submit" class="btn btn-success" id="loginButton">Login</button>
+            </form>
+
+
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
