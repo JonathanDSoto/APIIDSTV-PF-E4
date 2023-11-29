@@ -11,6 +11,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
+        'id_client',
         'name',
         'lastname',
         'email',
@@ -24,4 +25,9 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+  
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'id_client');
+    }
 }

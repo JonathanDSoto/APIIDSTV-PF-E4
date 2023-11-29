@@ -36,12 +36,7 @@ class UsersController extends Controller
 
         return redirect('/users');
     }
-
-    public function store()
-    {
-        return view('users.store');
-    }
-
+  
     public function show(string $id)
     {
         $user = User::findOrFail($id);
@@ -49,10 +44,11 @@ class UsersController extends Controller
         // return view('users.show', ['user' => $user]);
     }
 
-    public function edit(string $id)
+    public function client(string $id)
     {
-        $user = User::findOrFail($id);
-        return view('users.edit', ['user' => $user]);
+        $client = Client::findOrFail($id);
+        return $client;
+        // return view('users.show', ['user' => $user]);
     }
 
     public function update(Request $request, string $id)
