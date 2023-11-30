@@ -162,12 +162,12 @@
           </li>
           <li class="nav-item">
             <a href="/users" id="dashboardLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-              Users
+              Usuarios
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" id="ordersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-              Classes
+            <a href="/payments" id="ordersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+              Pagos
             </a>
           </li>
           <li class="nav-item">

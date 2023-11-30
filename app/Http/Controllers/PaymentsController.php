@@ -2,15 +2,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Membership;
 use App\Models\Payment;
+use App\Models\User;
 
 class PaymentsController extends Controller
 {
     public function index()
     {
+        $users = User::all();
         $payments = Payment::all();
-        return $payments;
-        // return view('payments.index', ['payments' => $payments]);
+        $memberships = Membership::all();
+        return view('payments', ['users' => $users, 'payments' => $payments, 'memberships' => $memberships]);
     }
 
     public function create(Request $request)
@@ -18,13 +21,12 @@ class PaymentsController extends Controller
         $validatedData = $request->validate([
             'memberships_id' => 'required|integer',
             'user_id' => 'required|integer',
-            'date' => 'required|date',
         ]);
 
         $payment = new Payment;
         $payment->memberships_id = $request->memberships_id;
         $payment->user_id = $request->user_id;
-        $payment->date = $request->date;
+        $payment->date = now();
         $payment->save();
 
         return redirect('/payments');

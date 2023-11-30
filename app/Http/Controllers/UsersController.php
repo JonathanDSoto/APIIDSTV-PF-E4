@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\User;
 use App\Models\Payment;
+use App\Models\User;
 
 class UsersController extends Controller
 {
@@ -38,7 +38,6 @@ class UsersController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        return $user;
         return view('users', ['user' => $user]);
     }
 
