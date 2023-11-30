@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Payment;
 
 class UsersController extends Controller
 {
     public function index()
     {
         $users = User::all();
-        return $users;
-        // return view('users.index', ['users' => $users]);
+        return view('users', ['users' => $users]);
     }
 
     public function create(Request $request)
@@ -39,7 +39,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         return $user;
-        // return view('users.show', ['user' => $user]);
+        return view('users', ['user' => $user]);
     }
 
     public function update(Request $request, string $id)
@@ -64,6 +64,7 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+        $user->payments()->delete();  // Asegúrate de que tienes una relación `payments` en tu modelo User
         $user->delete();
 
         return redirect('/users');
