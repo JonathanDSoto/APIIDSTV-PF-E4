@@ -162,7 +162,7 @@
           </li>
           <li class="nav-item">
             <a href="#" id="dashboardLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-              Members
+              Users
             </a>
           </li>
           <li class="nav-item">
@@ -212,14 +212,14 @@
         <table class="table" id="originalTable" style="width: 100%;" transition-style="in:square:hesitate">
           <tr>
             <th>Name</th>
-            <th>Lastname</th>
+            <th>Last Name</th>
             <th>Email</th>
           </tr>
           <tbody>
             @foreach ($users as $user)
             <tr data-id="{{ $user->id }}" class="search-result">
               <td>{{ $user->name }}</td>
-              <td>{{ $user->lastname }}</td>
+              <td>{{ $user->last_name }}</td>
               <td>{{ $user->email }}</td>
               <td><button class="btn btn-success registerAttendance">Register Attendance</button></td>
             </tr>
