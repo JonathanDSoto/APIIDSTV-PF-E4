@@ -75,9 +75,7 @@ Route::get('/home', function () {
 
 Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
 
-
 //Login
-
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
@@ -89,4 +87,3 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 //Home 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class, 'search']);
-
