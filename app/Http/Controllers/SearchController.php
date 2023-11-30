@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function search(Request $request)
-    {
-        $searchTerm = $request->input('searchTerm');
 
-        $results = User::where('name', 'like', "%$searchTerm%")
-                    ->orWhere('last_name', 'like', "%$searchTerm%")
-                    ->get();
+public function search(Request $request)
+{
+    $searchTerm = $request->input('searchTerm');
 
-        return response()->json($results);
-    }
+    $results = User::where('name', 'like', "%$searchTerm%")
+                   ->orWhere('last_name', 'like', "%$searchTerm%")
+                   ->get();
+
+    return response()->json($results);
+}
 }

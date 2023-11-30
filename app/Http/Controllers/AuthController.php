@@ -50,7 +50,7 @@ class AuthController extends Controller
 {
     $validatedData = $request->validate([
         'name' => 'required|max:255',
-        'lastname' => 'required|max:255',
+        'last_name' => 'required|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:6|max:10',
     ], [
@@ -61,7 +61,7 @@ class AuthController extends Controller
 
     $user = new User();
     $user->name = $validatedData['name'];
-    $user->lastname = $validatedData['lastname'];
+    $user->last_name = $validatedData['last_name'];
     $user->email = $validatedData['email'];
     $user->password = Hash::make($validatedData['password']);
     $user->save();

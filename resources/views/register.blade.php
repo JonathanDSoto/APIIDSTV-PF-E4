@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control CustomInput" id="lastname" name="lastname" placeholder="LastName" required onkeypress="return isNaN(event.key)">
+                    <input type="text" class="form-control CustomInput" id="last_name" name="last_name" placeholder="last_name" required onkeypress="return isNaN(event.key)">
                 </div>
 
                 <div class="form-group">
