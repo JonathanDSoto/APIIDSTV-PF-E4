@@ -1,10 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -19,19 +16,29 @@ class UsersController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:100',
-            'last_name' => 'required|max:100',
-            'email' => 'required|email|max:320|unique:users',
-            'password' => 'required|max:64',
+            'lastname' => 'required|max:100',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => [
+                'required|min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+            ],
+            'roll' => 'required|integer',
         ]);
 
         $user = new User;
         $user->name = $request->name;
-        $user->last_name = $request->last_name;
+        $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->roll = $request->roll;
         $user->save();
 
         return redirect('/users');
+    }
+
+    public function store()
+    {
+        return view('users.store');
     }
 
     public function show(string $id)
@@ -41,20 +48,31 @@ class UsersController extends Controller
         // return view('users.show', ['user' => $user]);
     }
 
+    public function edit(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('users.edit', ['user' => $user]);
+    }
+
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:100',
-            'last_name' => 'required|max:100',
-            'email' => 'required|email|max:320|unique:users,email,' . $id,
-            'password' => 'required|max:64',
+            'lastname' => 'required|max:100',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => [
+                'required|min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+            ],
+            'roll' => 'required|integer',
         ]);
 
         $user = User::findOrFail($id);
         $user->name = $request->name;
-        $user->last_name = $request->last_name;
+        $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->roll = $request->roll;
         $user->save();
 
         return redirect('/users');

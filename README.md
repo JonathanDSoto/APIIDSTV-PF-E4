@@ -1,4 +1,6 @@
-### Pre-requisitos 📋
+# Gym Management System
+
+## Pre-requisitos 📋
 
 _Antes de comenzar con la configuración de la base de datos y el registro de datos, asegúrate de cumplir con los siguientes requisitos:_
 
@@ -6,9 +8,17 @@ _Antes de comenzar con la configuración de la base de datos y el registro de da
    - Asegúrate de tener un servidor local en funcionamiento antes de proceder.
   
 **Creación de la Base de Datos:**
-   - Crea una base de datos con el nombre "gym" en tu entorno de desarrollo.
+   - Crea una base de datos con el nombre "gym" en tu entorno de desarrollo o ejecuta el siguiente comando en tu terminal:
 
-### Configuración de la Base de Datos y Registro de Datos 🛠️
+
+     ```
+     php artisan migrate
+     ```
+
+
+El sistema te pedirá confirmación para crear la base de datos 'gym'. Ingresa "yes" y presiona Enter para proceder.
+
+## Configuración de la Base de Datos y Registro de Datos 🛠️
 
 _Para configurar la base de datos y generar registros, sigue estos pasos:_
 
@@ -21,4 +31,4 @@ _Para configurar la base de datos y generar registros, sigue estos pasos:_
 
    Este comando realizará la migración de las tablas y llenará la base de datos con información de prueba.
 
-¡Listo! Ahora tu base de datos está configurada y poblada con datos de ejemplo. Puedes proceder con el desarrollo y prueba de tu aplicación.
+¡Listo! Ahora tu base de datos está configurada y poblada con datos de ejemplo. Puedes proceder con el desarrollo y prueba de la aplicación.

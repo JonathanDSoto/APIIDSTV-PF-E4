@@ -52,6 +52,7 @@
 
     @include('layouts.sidebar')
 
+
     <div class="container mt-4">
         <h1>Lista de Instructores</h1>
         <div class="text-right mb-3">

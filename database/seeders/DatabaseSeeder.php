@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -8,9 +9,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            MembershipsSeeder::class,
             UserSeeder::class,
-            PaymentSeeder::class,
         ]);
     }
 }
