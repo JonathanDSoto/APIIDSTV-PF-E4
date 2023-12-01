@@ -19,9 +19,9 @@ Route::delete('/users/{id}', [UsersController::class, 'destroy']);
 /////////////////////////// Payment Routes ///////////////////////////
 Route::get('/payments', [PaymentsController::class, 'index']);
 Route::post('/payments', [PaymentsController::class, 'create']);
-Route::get('/payments/{id}', [PaymentsController::class, 'show']);
+// Route::get('/payments/{id}', [PaymentsController::class, 'show']);
 // Obtén el cliente de un pago específico
-Route::get('/payments/{id}/user', [PaymentsController::class, 'paymentsByUser']);
+Route::post('/payments/{id}', [PaymentsController::class, 'paymentsByUser']);
 Route::put('/payments/{id}', [PaymentsController::class, 'update']);
 Route::delete('/payments/{id}', [PaymentsController::class, 'destroy']);
 

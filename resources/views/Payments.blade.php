@@ -40,10 +40,17 @@
             <input type="hidden" id="method" name="_method" value="POST">
             <label for="user_id">Nombre del Usuario:</label><br>
             <select id="user_id" name="user_id">
+                @if($users instanceof \App\Models\User)
+                <option value="{{ $users->id }}">{{ $users->name }} (ID: {{ $users->id }})</option>
+                @elseif($users instanceof \Illuminate\Database\Eloquent\Collection)
                 @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                <option value="{{ $user->id }}">{{ $user->name }} (ID: {{ $user->id }})</option>
                 @endforeach
-            <select><br>
+                @else
+                <option>No se pudo obtener el usuario</option>
+                @endif
+            <select>
+            <br>
             <label for="memberships_id">Membresía:</label><br>
             <select id="memberships_id" name="memberships_id">
                 @foreach ($memberships as $membership)

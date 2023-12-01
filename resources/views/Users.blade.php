@@ -31,8 +31,12 @@
             <td>{{ $user->name }}</td>
             <td>{{ $user->last_name }}</td>
             <td>{{ $user->email }}</td>
-            <td>
+            <td style="display: flex; gap: 10px;">
                 <button onclick="editarUsuario('{{ $user->id }}', decodeURIComponent('{{ rawurlencode($user->name) }}'), decodeURIComponent('{{ rawurlencode($user->last_name) }}'), '{{ $user->email }}')">Editar</button>
+                <form action="/payments/{{ $user->id }}" method="POST">
+                    @csrf
+                    <button type="submit">Ver pagos</button>
+                </form>
                 <form action="/users/{{ $user->id }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')

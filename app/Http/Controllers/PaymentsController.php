@@ -39,11 +39,13 @@ class PaymentsController extends Controller
         // return view('payments.show', ['payment' => $payment]);
     }
 
-    public function paymentsByUser(string $user_Id)
+    public function paymentsByUser(string $user_id)
     {
-        $payments = Payment::where('user_id', $user_Id)->get();
-        return $payments;
-        // return view('payments.byUser', ['payments' => $payments]);
+        $users = User::findOrFail($user_id);
+        $payments = Payment::where('user_id', $user_id)->get();
+        $memberships = Membership::all();
+
+        return view('payments', ['users' => $users, 'payments' => $payments, 'memberships' => $memberships]);
     }
 
     public function update(Request $request, string $id)
