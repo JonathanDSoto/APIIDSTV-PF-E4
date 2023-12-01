@@ -171,8 +171,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" id="productsLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-              Memberships
+            <a href="/memberships" id="productsLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+              Membresías
             </a>
           </li>
           <li class="nav-item">

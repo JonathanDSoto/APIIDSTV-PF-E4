@@ -9,7 +9,8 @@ class MembershipsController extends Controller
     public function index()
     {
         $memberships = Membership::all();
-        return $memberships;
+        // return $memberships;
+        return view('memberships', ['memberships' => $memberships]);
     }
 
     public function create(Request $request)
@@ -17,7 +18,6 @@ class MembershipsController extends Controller
         $membership = new Membership;
         $membership->name = $request->name;
         $membership->price = $request->price;
-        $membership->time = $request->time;
         $membership->save();
 
         return redirect('/memberships');
@@ -26,7 +26,7 @@ class MembershipsController extends Controller
     public function show($id)
     {
         $membership = Membership::findOrFail($id);
-        return $membership;
+        return view('memberships', ['memberships' => $memberships]);
     }
 
     public function update(Request $request, $id)
@@ -34,7 +34,6 @@ class MembershipsController extends Controller
         $membership = Membership::findOrFail($id);
         $membership->name = $request->name;
         $membership->price = $request->price;
-        $membership->time = $request->time;
         $membership->save();
 
         return redirect('/memberships');
