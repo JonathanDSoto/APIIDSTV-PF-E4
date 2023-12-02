@@ -176,8 +176,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" id="customersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-              Instructors
+            <a href="/instructors" id="customersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+              Instructores
             </a>
           </li>
           <li class="nav-item">
