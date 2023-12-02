@@ -1,12 +1,11 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Membership;
 
-class MembershipsSeeder extends Seeder
+class MembershipSeeder extends Seeder
 {
     public function run(): void
     {

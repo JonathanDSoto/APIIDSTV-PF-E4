@@ -7,6 +7,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\MembershipsController;
+use App\Http\Controllers\InstructorsController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -28,6 +29,13 @@ Route::post('/memberships', [MembershipsController::class, 'create']);
 Route::get('/memberships/{id}', [MembershipsController::class, 'show']);
 Route::put('/memberships/{id}', [MembershipsController::class, 'update']);
 Route::delete('/memberships/{id}', [MembershipsController::class, 'destroy']);
+
+/////////////////////////// Instructor Routes ///////////////////////////
+Route::get('/instructors', [InstructorsController::class, 'index']);
+Route::post('/instructors', [InstructorsController::class, 'create']);
+Route::get('/instructors/{id}', [InstructorsController::class, 'show']);
+Route::put('/instructors/{id}', [InstructorsController::class, 'update']);
+Route::delete('/instructors/{id}', [InstructorsController::class, 'destroy']);
 
 Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
 
