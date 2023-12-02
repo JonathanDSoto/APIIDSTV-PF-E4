@@ -12,5 +12,6 @@ class Instructor extends Model
         'id',
         'name',
         'last_name',
+        'specialty',
     ];
 }

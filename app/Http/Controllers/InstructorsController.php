@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Instructor;
@@ -18,11 +17,13 @@ class InstructorsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:100',
             'last_name' => 'required|max:100',
+            'specialty' => 'required|max:75',
         ]);
 
         $instructor = new Instructor;
         $instructor->name = $request->name;
         $instructor->last_name = $request->last_name;
+        $instructor->specialty = $request->specialty;
         $instructor->save();
 
         return redirect('/instructors');
@@ -31,6 +32,7 @@ class InstructorsController extends Controller
     public function show(string $id)
     {
         $instructor = Instructor::findOrFail($id);
+        return $instructors;
         return view('instructors', ['instructor' => $instructor]);
     }
 
@@ -39,11 +41,13 @@ class InstructorsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:100',
             'last_name' => 'required|max:100',
+            'specialty' => 'required|max:75',
         ]);
 
         $instructor = Instructor::findOrFail($id);
         $instructor->name = $request->name;
         $instructor->last_name = $request->last_name;
+        $instructor->specialty = $request->specialty;
         $instructor->save();
 
         return redirect('/instructors');

@@ -11,6 +11,7 @@ class CreateInstructorsTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('last_name', 100);
+            $table->string('specialty', 100);
             $table->timestamps();
         });
     }

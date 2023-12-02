@@ -12,9 +12,9 @@ class InstructorFactory extends Factory
     public function definition()
     {
         return [
-            'id' => $this->faker->unique()->numberBetween(1, 1000),
             'name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
+            'specialty' => $this->faker->jobTitle(),
         ];
     }
 }
