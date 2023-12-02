@@ -37,10 +37,8 @@ Route::get('/instructors/{id}', [InstructorsController::class, 'show']);
 Route::put('/instructors/{id}', [InstructorsController::class, 'update']);
 Route::delete('/instructors/{id}', [InstructorsController::class, 'destroy']);
 
-Route::get('/login', 'App\Http\Controllers\AuthController@loginPage');
-
 //Login
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 //Register
