@@ -37,6 +37,13 @@ Route::get('/instructors/{id}', [InstructorsController::class, 'show']);
 Route::put('/instructors/{id}', [InstructorsController::class, 'update']);
 Route::delete('/instructors/{id}', [InstructorsController::class, 'destroy']);
 
+/////////////////////////// Instructor Routes ///////////////////////////
+Route::get('/lections', [LectionController::class, 'index']);
+Route::post('/lections', [LectionController::class, 'create']);
+Route::get('/lections/{id}', [LectionController::class, 'show']);
+Route::put('/lections/{id}', [LectionController::class, 'update']);
+Route::delete('/lections/{id}', [LectionController::class, 'destroy']);
+
 //Login
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
