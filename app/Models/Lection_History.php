@@ -17,16 +17,16 @@ class Lection_History extends Model
 
     public function lection()
     {
-        return $this->belongsTo(Lection::class);
+        return $this->belongsTo(Lection::class, 'lection_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function instructor()
     {
-        return $this->belongsTo(Instructor::class);
+        return $this->belongsTo(Instructor::class, 'instructor_id');
     }
 }

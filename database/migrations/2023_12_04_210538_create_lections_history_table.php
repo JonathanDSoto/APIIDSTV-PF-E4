@@ -7,18 +7,18 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('lection_histories', function (Blueprint $table) {
+        Schema::create('lection_history', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lection_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('instructor_id')->constrained();
+            $table->foreignId('lection_id')->constrained('lections');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('instructor_id')->constrained('instructors');
             $table->boolean('completed');
             $table->timestamps();
         });
     }
 
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('lections_history');
+        Schema::dropIfExists('lection_history');
     }
 };

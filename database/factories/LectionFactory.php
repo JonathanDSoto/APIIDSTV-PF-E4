@@ -2,6 +2,8 @@
 namespace Database\Factories;
 
 use App\Models\Lection;
+use App\Models\User;
+use App\Models\Instructor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LectionFactory extends Factory
@@ -11,10 +13,10 @@ class LectionFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->randomDigitNotNull,
-            'instructor_id' => $this->faker->randomDigitNotNull,
-            'date' => $this->faker->date,
-            'schedule' => $this->faker->time,
+            'user_id' => User::all()->random()->id,
+            'instructor_id' => Instructor::all()->random()->id,
+            'date' => $this->faker->date(),
+            'schedule' => $this->faker->time(),
         ];
     }
 }
