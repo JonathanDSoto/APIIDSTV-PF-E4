@@ -181,8 +181,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" id="customersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-              Assistance
+            <a href="/lections" id="customersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+              Lections
             </a>
           </li>
           <li class="nav-item mt-auto">

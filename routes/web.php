@@ -8,6 +8,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\MembershipsController;
 use App\Http\Controllers\InstructorsController;
+use App\Http\Controllers\LectionsController;
 
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
@@ -37,12 +38,12 @@ Route::get('/instructors/{id}', [InstructorsController::class, 'show']);
 Route::put('/instructors/{id}', [InstructorsController::class, 'update']);
 Route::delete('/instructors/{id}', [InstructorsController::class, 'destroy']);
 
-/////////////////////////// Instructor Routes ///////////////////////////
-Route::get('/lections', [LectionController::class, 'index']);
-Route::post('/lections', [LectionController::class, 'create']);
-Route::get('/lections/{id}', [LectionController::class, 'show']);
-Route::put('/lections/{id}', [LectionController::class, 'update']);
-Route::delete('/lections/{id}', [LectionController::class, 'destroy']);
+/////////////////////////// Lection Routes ///////////////////////////
+Route::get('/lections', [LectionsController::class, 'index']);
+Route::post('/lections', [LectionsController::class, 'create']);
+Route::get('/lections/{id}', [LectionsController::class, 'show']);
+Route::put('/lections/{id}', [LectionsController::class, 'update']);
+Route::delete('/lections/{id}', [LectionsController::class, 'destroy']);
 
 //Login
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');

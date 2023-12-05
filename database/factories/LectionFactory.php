@@ -16,7 +16,7 @@ class LectionFactory extends Factory
             'user_id' => User::all()->random()->id,
             'instructor_id' => Instructor::all()->random()->id,
             'date' => $this->faker->date(),
-            'schedule' => $this->faker->time(),
+            'schedule' => $this->faker->time('H:i'),
         ];
     }
 }
