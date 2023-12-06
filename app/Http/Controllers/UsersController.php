@@ -63,7 +63,7 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        $user->payments()->delete();  // Asegúrate de que tienes una relación `payments` en tu modelo User
+        $user->payments()->delete();
         $user->delete();
 
         return redirect('/users');

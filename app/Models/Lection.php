@@ -11,6 +11,7 @@ class Lection extends Model
     protected $fillable = [
         'user_id',
         'instructor_id',
+        'assistance',
         'date',
         'schedule',
     ];

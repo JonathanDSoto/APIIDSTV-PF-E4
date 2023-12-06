@@ -41,10 +41,10 @@
             <label for="user_id">Nombre del Usuario:</label><br>
             <select id="user_id" name="user_id">
                 @if($users instanceof \App\Models\User)
-                <option value="{{ $users->id }}">{{ $users->name }} (ID: {{ $users->id }})</option>
+                <option value="{{ $users->id }}">{{ $users->name }}</option>
                 @elseif($users instanceof \Illuminate\Database\Eloquent\Collection)
                 @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }} (ID: {{ $user->id }})</option>
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
                 @else
                 <option>No se pudo obtener el usuario</option>

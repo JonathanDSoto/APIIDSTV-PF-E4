@@ -221,7 +221,12 @@
               <td>{{ $user->name }}</td>
               <td>{{ $user->last_name }}</td>
               <td>{{ $user->email }}</td>
-              <td><button class="btn btn-success registerAttendance">Register Attendance</button></td>
+              <td>
+                <form action="/lections/{{ $user->id }}" method="POST">
+                      @csrf
+                      <button type="submit">Ver clases</button>
+                </form>
+              </td>
             </tr>
             @endforeach
           </tbody>

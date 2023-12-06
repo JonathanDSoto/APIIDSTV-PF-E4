@@ -11,6 +11,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('instructor_id')->constrained();
+            $table->boolean('assistance')->default(false);
             $table->date('date');
             $table->time('schedule');
             $table->timestamps();

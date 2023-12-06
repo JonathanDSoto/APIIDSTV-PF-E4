@@ -15,6 +15,7 @@ class LectionFactory extends Factory
         return [
             'user_id' => User::all()->random()->id,
             'instructor_id' => Instructor::all()->random()->id,
+            'assistance' => $this->faker->boolean,
             'date' => $this->faker->date(),
             'schedule' => $this->faker->time('H:i'),
         ];

@@ -29,6 +29,7 @@ class LectionsController extends Controller
         $lection = new Lection;
         $lection->user_id = $request->user_id;
         $lection->instructor_id = $request->instructor_id;
+        $lection->assistance = false;
         $lection->date = $request->date;
         $lection->schedule = $request->schedule;
         $lection->save();
@@ -47,8 +48,16 @@ class LectionsController extends Controller
         $users = User::findOrFail($user_id);
         $lections = Lection::where('user_id', $user_id)->get();
         $instructors = Instructor::all();
-
         return view('lections', ['users' => $users, 'lections' => $lections, 'instructors' => $instructors]);
+    }
+
+    public function registerAssistance(string $id)
+    {
+        $lection = Lection::findOrFail($id);
+        $lection->assistance = !$lection->assistance;
+        $lection->save();
+
+        return redirect('/lections');
     }
 
     public function update(Request $request, string $id)
@@ -63,6 +72,7 @@ class LectionsController extends Controller
         $lection = Lection::findOrFail($id);
         $lection->user_id = $request->user_id;
         $lection->instructor_id = $request->instructor_id;
+        $lection->assistance = !$lection->assistance;
         $lection->date = $request->date;
         $lection->schedule = $request->schedule;
         $lection->save();

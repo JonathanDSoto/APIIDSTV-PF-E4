@@ -28,6 +28,7 @@
             <th>Instructor</th>
             <th>Date</th>
             <th>Schedule</th>
+            <th>Assistance</th>
             <th>Actions</th>
         </tr>
         @foreach ($lections as $lection)
@@ -36,8 +37,19 @@
             <td>{{ $lection->instructor->name }}</td>
             <td>{{ $lection->date }}</td>
             <td>{{ $lection->schedule }}</td>
+            <td>{{ $lection->assistance ? 'Present' : 'Absent' }}</td>
             <td class="actions">
                 <button onclick="editLection('{{ $lection->id }}')">Edit</button>
+                <form action="/register-assistance/{{ $lection->id }}" method="POST">
+                    @csrf
+                    <button type="submit">
+                        @if($lection->assistance)
+                            Cancel Assistance
+                        @else
+                            Register Assistance
+                        @endif
+                   </button>
+                </form>
                 <form action="/lections/{{ $lection->id }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -55,9 +67,15 @@
             <input type="hidden" id="method" name="_method" value="POST">
             <label for="user_id">User:</label><br>
             <select id="user_id" name="user_id">
+                @if($users instanceof \App\Models\User)
+                <option value="{{ $users->id }}">{{ $users->name }}</option>
+                @elseif($users instanceof \Illuminate\Database\Eloquent\Collection)
                 @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
+                @else
+                <option>No se pudo obtener el usuario</option>
+                @endif
             </select><br>
             <label for="instructor_id">Instructor:</label><br>
             <select id="instructor_id" name="instructor_id">
