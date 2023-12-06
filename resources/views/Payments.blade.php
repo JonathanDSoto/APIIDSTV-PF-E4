@@ -13,6 +13,11 @@
             background: white;
             border: 1px solid black;
         }
+
+        /* Nuevo estilo para hacer más opaco el texto */
+        #tablaDatos tr.deleted-row {
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
@@ -24,27 +29,12 @@
             <th>Nombre del Usuario</th>
             <th>Nombre de la Membresía</th>
             <th>Fecha</th>
-            <th>Acciones</th>
         </tr>
         @foreach ($payments as $payment)
-            <tr>
+            <tr class="{{ $payment->trashed() ? 'deleted-row' : '' }}">
                 <td>{{ $payment->user->name }}</td>
                 <td>{{ $payment->membership->name }}</td>
                 <td>{{ $payment->date }}</td>
-                <td>
-                    <button onclick="editarPago('{{ $payment->id }}', '{{ $payment->user_id }}', '{{ $payment->memberships_id }}', '{{ $payment->date }}')">Editar</button>
-                    <form action="/payments/{{ $payment->id }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" {{ $payment->trashed() ? 'disabled' : '' }}>Eliminar</button>
-                    </form>
-                    @if ($payment->trashed())
-                        <form action="/payments/restore/{{ $payment->id }}" method="POST" style="display: inline;">
-                            @csrf
-                            <button type="submit">Restaurar</button>
-                        </form>
-                    @endif
-                </td>
             </tr>
         @endforeach
     </table>
