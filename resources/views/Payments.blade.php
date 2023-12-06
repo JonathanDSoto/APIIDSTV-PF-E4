@@ -18,18 +18,34 @@
 <body>
     <h1>Registro de Pagos</h1>
     <button id="crearButton">Crear Pago</button>
+    <button onclick="location.href='/payments?show_all=true'">Show All Payments</button>
     <table id="tablaDatos">
         <tr>
             <th>Nombre del Usuario</th>
             <th>Nombre de la Membresía</th>
             <th>Fecha</th>
+            <th>Acciones</th>
         </tr>
         @foreach ($payments as $payment)
-        <tr>
-            <td>{{ $payment->user->name }}</td>
-            <td>{{ $payment->membership->name }}</td>
-            <td>{{ $payment->date }}</td>
-        </tr>
+            <tr>
+                <td>{{ $payment->user->name }}</td>
+                <td>{{ $payment->membership->name }}</td>
+                <td>{{ $payment->date }}</td>
+                <td>
+                    <button onclick="editarPago('{{ $payment->id }}', '{{ $payment->user_id }}', '{{ $payment->memberships_id }}', '{{ $payment->date }}')">Editar</button>
+                    <form action="/payments/{{ $payment->id }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" {{ $payment->trashed() ? 'disabled' : '' }}>Eliminar</button>
+                    </form>
+                    @if ($payment->trashed())
+                        <form action="/payments/restore/{{ $payment->id }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit">Restaurar</button>
+                        </form>
+                    @endif
+                </td>
+            </tr>
         @endforeach
     </table>
 
@@ -65,14 +81,14 @@
 
     <script>
         document.getElementById('crearButton').onclick = function() {
-        document.getElementById('popupTitle').textContent = 'Crear Pago';
-        document.getElementById('paymentForm').action = '/payments';
-        document.getElementById('method').value = 'POST';
-        document.getElementById('submitButton').value = 'Crear';
-        document.getElementById('user_id').value = '';
-        document.getElementById('memberships_id').value = '';
-        document.getElementById('popup').style.display = 'block';
-    };
+            document.getElementById('popupTitle').textContent = 'Crear Pago';
+            document.getElementById('paymentForm').action = '/payments';
+            document.getElementById('method').value = 'POST';
+            document.getElementById('submitButton').value = 'Crear';
+            document.getElementById('user_id').value = '';
+            document.getElementById('memberships_id').value = '';
+            document.getElementById('popup').style.display = 'block';
+        };
 
         function editarPago(id, userId, membershipsId, date) {
             document.getElementById('popupTitle').textContent = 'Editar Pago';

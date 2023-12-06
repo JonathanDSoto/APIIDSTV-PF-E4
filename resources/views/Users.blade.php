@@ -3,7 +3,6 @@
 <head>
     <title>CRUD Básico</title>
     <style>
-        /* Estilos para la ventana emergente */
         #popup {
             display: none;
             position: fixed;
@@ -44,10 +43,10 @@
                     <button type="submit" {{ $user->trashed() ? 'disabled' : '' }}>Eliminar</button>
                 </form>
                 @if ($user->trashed())
-                    <form action="/users/enable/{{ $user->id }}" method="POST" style="display: inline;">
-                        @csrf
-                        <button type="submit">Habilitar cuenta</button>
-                    </form>
+                <form action="/users/restore/{{ $user->id }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button type="submit">Habilitar Cuenta</button>
+                </form>
                 @endif
             </td>
         </tr>

@@ -8,13 +8,21 @@ use App\Models\User;
 
 class PaymentsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $showAll = $request->query('show_all');
+    
+        if ($showAll) {
+            $payments = Payment::withTrashed()->get();
+        } else {
+            $payments = Payment::all();
+        }
+    
         $users = User::all();
-        $payments = Payment::all();
         $memberships = Membership::all();
+    
         return view('payments', ['users' => $users, 'payments' => $payments, 'memberships' => $memberships]);
-    }
+    }      
 
     public function create(Request $request)
     {
@@ -32,6 +40,14 @@ class PaymentsController extends Controller
         return redirect('/payments');
     }
 
+    public function restore(string $id)
+    {
+        $payment = Payment::withTrashed()->findOrFail($id);
+        $payment->restore();
+    
+        return redirect('/payments');
+    }
+
     public function show(string $id)
     {
         $payment = Payment::findOrFail($id);
@@ -41,12 +57,12 @@ class PaymentsController extends Controller
 
     public function paymentsByUser(string $user_id)
     {
-        $users = User::findOrFail($user_id);
-        $payments = Payment::where('user_id', $user_id)->get();
+        $user = User::withTrashed()->findOrFail($user_id);
+        $payments = Payment::where('user_id', $user_id)->withTrashed()->get();
         $memberships = Membership::all();
-
-        return view('payments', ['users' => $users, 'payments' => $payments, 'memberships' => $memberships]);
-    }
+    
+        return view('payments', ['users' => $user, 'payments' => $payments, 'memberships' => $memberships]);
+    }      
 
     public function update(Request $request, string $id)
     {

@@ -42,6 +42,15 @@ class UsersController extends Controller
         return redirect('/users');
     }
 
+    public function restore(string $id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
+        $user->payments()->withTrashed()->restore();
+
+        return redirect('/users');
+    }
+
     public function enableAccount(string $id)
     {
         $user = User::withTrashed()->findOrFail($id);
