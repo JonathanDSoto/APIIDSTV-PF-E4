@@ -19,6 +19,7 @@
 <body>
     <h1>Registro de Usuarios</h1>
     <button id="crearButton">Crear Usuario</button>
+    <button onclick="location.href='/users?show_all=true'">Show All Users</button>
     <table id="tablaDatos">
         <tr>
             <th>Nombre</th>
@@ -32,7 +33,7 @@
             <td>{{ $user->last_name }}</td>
             <td>{{ $user->email }}</td>
             <td style="display: flex; gap: 10px;">
-                <button onclick="editarUsuario('{{ $user->id }}', decodeURIComponent('{{ rawurlencode($user->name) }}'), decodeURIComponent('{{ rawurlencode($user->last_name) }}'), '{{ $user->email }}')">Editar</button>
+                <button onclick="editarUsuario('{{ $user->id }}', decodeURIComponent('{{ rawurlencode($user->name) }}'), decodeURIComponent('{{ rawurlencode($user->last_name) }}'), '{{ $user->email }}')" {{ $user->trashed() ? 'disabled' : '' }}>Editar</button>
                 <form action="/payments/{{ $user->id }}" method="POST">
                     @csrf
                     <button type="submit">Ver pagos</button>
@@ -40,14 +41,19 @@
                 <form action="/users/{{ $user->id }}" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Eliminar</button>
+                    <button type="submit" {{ $user->trashed() ? 'disabled' : '' }}>Eliminar</button>
                 </form>
+                @if ($user->trashed())
+                    <form action="/users/enable/{{ $user->id }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit">Habilitar cuenta</button>
+                    </form>
+                @endif
             </td>
         </tr>
         @endforeach
     </table>
 
-    <!-- Ventana emergente con el formulario para crear un usuario -->
     <div id="popup">
         <h2 id="popupTitle">Crear Usuario</h2>
         <form id="userForm" action="/users" method="POST">

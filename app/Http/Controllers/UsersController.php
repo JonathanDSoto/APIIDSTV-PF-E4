@@ -10,9 +10,16 @@ use App\Models\User;
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $showAll = $request->input('show_all');
+
+        if ($showAll) {
+            $users = User::withTrashed()->get();
+        } else {
+            $users = User::all();
+        }
+
         return view('users', ['users' => $users]);
     }
 
@@ -31,6 +38,14 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
+
+        return redirect('/users');
+    }
+
+    public function enableAccount(string $id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
 
         return redirect('/users');
     }

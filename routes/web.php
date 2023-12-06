@@ -13,6 +13,7 @@ use App\Http\Controllers\LectionsController;
 /////////////////////////// User Routes ///////////////////////////
 Route::get('/users', [UsersController::class, 'index']);
 Route::post('/users', [UsersController::class, 'create']);
+Route::post('/users/enable/{id}', [UsersController::class, 'enableAccount']);
 Route::get('/users/{id}', [UsersController::class, 'show']);
 Route::put('/users/{id}', [UsersController::class, 'update']);
 Route::delete('/users/{id}', [UsersController::class, 'destroy']);
