@@ -88,6 +88,8 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->payments()->delete();
+
+        $user->lections()->delete();
         $user->delete();
 
         return redirect('/users');

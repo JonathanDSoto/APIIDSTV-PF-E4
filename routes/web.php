@@ -43,6 +43,7 @@ Route::delete('/instructors/{id}', [InstructorsController::class, 'destroy']);
 /////////////////////////// Lection Routes ///////////////////////////
 Route::get('/lections', [LectionsController::class, 'index']);
 Route::post('/lections', [LectionsController::class, 'create']);
+Route::get('/lections/{id}', [LectionsController::class, 'show']);
 Route::post('/lections/{id}', [LectionsController::class, 'lectionsByUser']);
 Route::POST('/register-assistance/{id}', [LectionsController::class, 'registerAssistance']);
 Route::put('/lections/{id}', [LectionsController::class, 'update']);

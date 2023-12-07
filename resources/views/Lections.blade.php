@@ -17,11 +17,20 @@
             display: flex;
             gap: 10px;
         }
+        .disabled-lection {
+            opacity: 0.5;
+        }
+        .disabled-instructor {
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
     <h1>Lection Management</h1>
     <button id="createLectionButton">Create Lection</button>
+    <button onclick="togglePayments()">
+        {{ $showAll ? 'Ver Pagos Activos' : 'Ver Todos los Pagos' }}
+    </button>
     <table id="lectionTable">
         <tr>
             <th>User</th>
@@ -31,39 +40,37 @@
             <th>Assistance</th>
             <th>Actions</th>
         </tr>
+
         @foreach ($lections as $lection)
-        <tr>
-            <td>{{ $lection->user->name }}</td>
-            <td>{{ $lection->instructor->name }}</td>
-            <td>{{ $lection->date }}</td>
-            <td>{{ $lection->schedule }}</td>
-            <td>{{ $lection->assistance ? 'Present' : 'Absent' }}</td>
-            <td class="actions">
-                <button onclick="editLection('{{ $lection->id }}')">Edit</button>
-                <form action="/register-assistance/{{ $lection->id }}" method="POST">
-                    @csrf
-                    <button type="submit">
-                        @if($lection->assistance)
-                            Cancel Assistance
-                        @else
-                            Register Assistance
-                        @endif
-                   </button>
-                </form>
-                <form action="/lections/{{ $lection->id }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
+            <tr class="{{ $lection->trashed() ? 'deleted-row' : '' }} {{ $lection->trashed() ? 'disabled-lection' : '' }}">
+                <td>{{ optional($lection->user)->name }}</td>
+                <td class="{{ optional($lection->instructor)->trashed() ? 'disabled-instructor' : '' }}">{{ optional($lection->instructor)->name }}</td>
+                <td>{{ $lection->date }}</td>
+                <td>{{ $lection->schedule }}</td>
+                <td>{{ $lection->assistance ? 'Present' : 'Absent' }}</td>
+                <td class="actions">
+                    <button onclick="editLection('{{ $lection->id }}')" {{ $lection->trashed() ? 'disabled' : '' }}>Edit</button>
+                    
+                    <form action="/register-assistance/{{ $lection->id }}" method="POST" {{ $lection->trashed() ? 'disabled' : '' }}>
+                        @csrf
+                        <button type="submit" {{ $lection->trashed() ? 'disabled' : '' }}>
+                            @if($lection->assistance)
+                                Cancel Assistance
+                            @else
+                                Register Assistance
+                            @endif
+                        </button>
+                    </form>
+                </td>
+            </tr>
         @endforeach
     </table>
 
     <div id="popup">
         <h2 id="popupTitle">Create Lection</h2>
-        <form id="lectionForm" action="/lections" method="POST">
+        <form id="lectionForm" action="/lections/{id}" method="POST">
             @csrf
+            @method('PUT')
             <input type="hidden" id="method" name="_method" value="POST">
             <label for="user_id">User:</label><br>
             <select id="user_id" name="user_id">
@@ -93,6 +100,11 @@
     </div>
 
     <script>
+        function togglePayments() {
+            var showAll = {{ $showAll ? 'true' : 'false' }};
+            window.location.href = '/lections?show_all=' + (showAll ? '0' : '1');
+        }
+        
         document.getElementById('createLectionButton').onclick = function() {
             document.getElementById('popupTitle').textContent = 'Create Lection';
             document.getElementById('lectionForm').action = '/lections';

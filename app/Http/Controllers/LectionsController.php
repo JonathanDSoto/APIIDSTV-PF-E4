@@ -22,7 +22,7 @@ class LectionsController extends Controller
         $users = User::all();
         $instructors = Instructor::all();
     
-        return view('lections', compact('users', 'lections', 'instructors', 'showAll'));
+        return view('lections', ['users' => $users, 'lections' => $lections, 'instructors' => $instructors,'showAll' => $showAll]);
     }
 
     public function create(Request $request)
@@ -76,17 +76,17 @@ class LectionsController extends Controller
             'date' => 'required|date',
             'schedule' => 'required|date_format:H:i',
         ]);        
-
+    
         $lection = Lection::findOrFail($id);
         $lection->user_id = $request->user_id;
         $lection->instructor_id = $request->instructor_id;
-        $lection->assistance = !$lection->assistance;
+        $lection->assistance = $request->has('assistance');
         $lection->date = $request->date;
         $lection->schedule = $request->schedule;
         $lection->save();
-
+    
         return redirect('/lections');
-    }
+    }    
 
     public function destroy(string $id)
     {
