@@ -20,7 +20,7 @@ class UsersController extends Controller
             $users = User::all();
         }
 
-        return view('users', ['users' => $users]);
+        return view('users', ['users' => $users, 'showAll' => $showAll]);
     }
 
     public function create(Request $request)

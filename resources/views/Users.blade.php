@@ -18,7 +18,9 @@
 <body>
     <h1>Registro de Usuarios</h1>
     <button id="crearButton">Crear Usuario</button>
-    <button onclick="location.href='/users?show_all=true'">Show All Users</button>
+    <button onclick="toggleUsers()">
+        {{ $showAll ? 'Ver Usuarios Activos' : 'Ver Todos los Usuarios' }}
+    </button>
     <table id="tablaDatos">
         <tr>
             <th>Nombre</th>
@@ -72,6 +74,11 @@
     </div>
 
     <script>
+        function toggleUsers() {
+            var showAll = {{ $showAll ? 'true' : 'false' }};
+            window.location.href = '/users?show_all=' + (showAll ? '0' : '1');
+        }
+
         document.getElementById('crearButton').onclick = function() {
             document.getElementById('popupTitle').textContent = 'Crear Usuario';
             document.getElementById('userForm').action = '/users';
