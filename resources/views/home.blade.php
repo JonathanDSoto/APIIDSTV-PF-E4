@@ -224,6 +224,7 @@
               <td>
                 <form action="/lections/{{ $user->id }}" method="POST">
                       @csrf
+                      <input type="hidden" name="show_all" value="1">
                       <button type="submit">Ver clases</button>
                 </form>
               </td>

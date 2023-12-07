@@ -22,7 +22,7 @@ class LectionsController extends Controller
         $users = User::all();
         $instructors = Instructor::all();
     
-        return view('lections', ['users' => $users, 'lections' => $lections, 'instructors' => $instructors,'showAll' => $showAll]);
+        return view('lections', ['users' => $users, 'lections' => $lections, 'instructors' => $instructors, 'showAll' => $showAll]);
     }
 
     public function create(Request $request)
@@ -51,12 +51,15 @@ class LectionsController extends Controller
         return $lection;
     }
 
-    public function lectionsByUser(string $user_id)
+    public function lectionsByUser(Request $request, string $user_id)
     {
         $users = User::findOrFail($user_id);
         $lections = Lection::where('user_id', $user_id)->get();
         $instructors = Instructor::all();
-        return view('lections', ['users' => $users, 'lections' => $lections, 'instructors' => $instructors]);
+
+        $showAll = $request->query('show_all', false);
+
+        return view('lections', ['users' => $users, 'lections' => $lections, 'instructors' => $instructors, 'showAll' => $showAll]);
     }
 
     public function registerAssistance(string $id)

@@ -29,7 +29,7 @@
     <h1>Lection Management</h1>
     <button id="createLectionButton">Create Lection</button>
     <button onclick="togglePayments()">
-        {{ $showAll ? 'Ver Pagos Activos' : 'Ver Todos los Pagos' }}
+        {{ $showAll ? 'Ver Lecciones Activas' : 'Ver Todas las Lecciones' }}
     </button>
     <table id="lectionTable">
         <tr>
