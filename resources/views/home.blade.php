@@ -1,5 +1,3 @@
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +43,6 @@
       border: none;
       padding: 10px;
       text-align: left;
-
     }
 
     /* Eliminar las líneas entre los registros de usuario */
@@ -223,9 +220,9 @@
               <td>{{ $user->email }}</td>
               <td>
                 <form action="/lections/{{ $user->id }}" method="POST">
-                      @csrf
-                      <input type="hidden" name="show_all" value="1">
-                      <button type="submit">Ver clases</button>
+                  @csrf
+                  <input type="hidden" name="show_all" value="1">
+                  <button type="submit" class="btn btn-primary" style="border: none; background-color: #F1CCBA;">Ver clases</button>
                 </form>
               </td>
             </tr>
