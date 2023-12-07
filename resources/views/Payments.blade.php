@@ -22,7 +22,9 @@
 <body>
     <h1>Registro de Pagos</h1>
     <button id="crearButton">Crear Pago</button>
-    <button onclick="location.href='/payments?show_all=true'">Show All Payments</button>
+    <button onclick="togglePayments()">
+        {{ $showAll ? 'Ver Pagos Activos' : 'Ver Todos los Pagos' }}
+    </button>
     <table id="tablaDatos">
         <tr>
             <th>Nombre del Usuario</th>
@@ -69,6 +71,11 @@
     </div>
 
     <script>
+        function togglePayments() {
+            var showAll = {{ $showAll ? 'true' : 'false' }};
+            window.location.href = '/payments?show_all=' + (showAll ? '0' : '1');
+        }
+
         document.getElementById('crearButton').onclick = function() {
             document.getElementById('popupTitle').textContent = 'Crear Pago';
             document.getElementById('paymentForm').action = '/payments';

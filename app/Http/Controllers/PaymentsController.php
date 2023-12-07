@@ -11,18 +11,18 @@ class PaymentsController extends Controller
     public function index(Request $request)
     {
         $showAll = $request->query('show_all');
-    
+
         if ($showAll) {
             $payments = Payment::withTrashed()->get();
         } else {
             $payments = Payment::all();
         }
-    
+
         $users = User::all();
         $memberships = Membership::all();
-    
-        return view('payments', ['users' => $users, 'payments' => $payments, 'memberships' => $memberships]);
-    }      
+
+        return view('payments', ['users' => $users, 'payments' => $payments, 'memberships' => $memberships, 'showAll' => $showAll]);
+    }  
 
     public function create(Request $request)
     {
