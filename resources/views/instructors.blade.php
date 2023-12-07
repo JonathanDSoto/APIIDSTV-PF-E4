@@ -19,6 +19,9 @@
 <body>
     <h1>Registro de Instructores</h1>
     <button id="crearButton">Crear Instructor</button>
+    <button onclick="toggleInstructors()">
+        {{ $showAll ? 'Ver Instructores Activos' : 'Ver Todos los Instructores' }}
+    </button>
     <table id="tablaDatos">
         <tr>
             <th>Nombre</th>
@@ -27,20 +30,24 @@
             <th>Acciones</th>
         </tr>
         @foreach ($instructors as $instructor)
-        <tr>
+        <tr style="{{ $instructor->trashed() ? 'opacity: 0.5;' : '' }}">
             <td>{{ $instructor->name }}</td>
             <td>{{ $instructor->last_name }}</td>
             <td>{{ $instructor->specialty }}</td>
             <td>
-                <div style="display: flex; gap: 10px;">
-                    <button onclick="editarInstructor('{{ $instructor->id }}', '{{ $instructor->name }}', '{{ $instructor->last_name }}', '{{ $instructor->specialty }}')">Editar</button>
-                    <form action="/instructors/{{ $instructor->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Eliminar</button>
-                    </form>
-                </div>
-            </td>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="editarInstructor('{{ $instructor->id }}', '{{ $instructor->name }}', '{{ $instructor->last_name }}', '{{ $instructor->specialty }}')" {{ $instructor->trashed() ? 'disabled' : '' }}>
+                    Editar
+                </button>
+                <form action="/instructors/{{ $instructor->id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" {{ $instructor->trashed() ? 'disabled' : '' }}>
+                        Eliminar
+                    </button>
+                </form>
+            </div>
+        </td>
         </tr>
         @endforeach
     </table>
@@ -63,6 +70,11 @@
     </div>
 
     <script>
+        function toggleInstructors() {
+            var showAll = {{ $showAll ? 'true' : 'false' }};
+            window.location.href = '/instructors?show_all=' + (showAll ? '0' : '1');
+        }
+
         document.getElementById('crearButton').onclick = function() {
             document.getElementById('popupTitle').textContent = 'Crear Instructor';
             document.getElementById('instructorForm').action = '/instructors';

@@ -13,6 +13,7 @@ class CreateInstructorsTable extends Migration
             $table->string('last_name', 100);
             $table->string('specialty', 100);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

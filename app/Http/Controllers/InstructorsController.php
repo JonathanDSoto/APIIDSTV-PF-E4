@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 
 class InstructorsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $instructors = Instructor::all();
-        return view('instructors', ['instructors' => $instructors]);
-    }
+        $showAll = $request->input('show_all', false);
+    
+        if ($showAll) {
+            $instructors = Instructor::withTrashed()->get();
+        } else {
+            $instructors = Instructor::all();
+        }
+    
+        return view('instructors', ['instructors' => $instructors, 'showAll' => $showAll]);
+    }    
 
     public function create(Request $request)
     {
