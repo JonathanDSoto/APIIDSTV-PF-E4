@@ -9,12 +9,20 @@ use App\Models\Instructor;
 
 class LectionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $showAll = $request->query('show_all');
+    
+        if ($showAll) {
+            $lections = Lection::withTrashed()->get();
+        } else {
+            $lections = Lection::all();
+        }
+    
         $users = User::all();
-        $lections = Lection::all();
         $instructors = Instructor::all();
-        return view('lections', ['users' => $users, 'lections' => $lections, 'instructors' => $instructors]);
+    
+        return view('lections', compact('users', 'lections', 'instructors', 'showAll'));
     }
 
     public function create(Request $request)

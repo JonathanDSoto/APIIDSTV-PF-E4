@@ -14,7 +14,6 @@
             border: 1px solid black;
         }
 
-        /* Nuevo estilo para hacer más opaco el texto */
         #tablaDatos tr.deleted-row {
             opacity: 0.5;
         }
