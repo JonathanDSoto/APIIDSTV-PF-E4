@@ -1,8 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lection Management</title>
     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .disabled-lection {
+            opacity: 0.5;
+        }
+
+        .disabled-instructor {
+            opacity: 0.5;
+        }
+
+        #container {
+            width: 80%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            margin: 20px;
+            padding: 10px;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: calc(100% - 20px);
+            border-collapse: collapse;
+            margin: 10px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
         #popup {
             display: none;
             position: fixed;
@@ -13,90 +83,120 @@
             background: white;
             border: 1px solid black;
         }
-        .actions {
-            display: flex;
-            gap: 10px;
+
+        #popupTitle {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            margin: 0;
+            border-radius: 4px 4px 0 0;
         }
-        .disabled-lection {
-            opacity: 0.5;
+
+        #lectionForm {
+            padding: 20px;
         }
-        .disabled-instructor {
-            opacity: 0.5;
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #submitButton {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #popup button {
+            background-color: #ccc;
+            color: #333;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Lection Management</h1>
-    <button id="createLectionButton">Create Lection</button>
-    <button onclick="togglePayments()">
-        {{ $showAll ? 'Ver Lecciones Activas' : 'Ver Todas las Lecciones' }}
-    </button>
-    <table id="lectionTable">
-        <tr>
-            <th>User</th>
-            <th>Instructor</th>
-            <th>Date</th>
-            <th>Schedule</th>
-            <th>Assistance</th>
-            <th>Actions</th>
-        </tr>
-
-        @foreach ($lections as $lection)
-            <tr class="{{ $lection->trashed() ? 'deleted-row' : '' }} {{ $lection->trashed() ? 'disabled-lection' : '' }}">
-                <td>{{ optional($lection->user)->name }}</td>
-                <td class="{{ optional($lection->instructor)->trashed() ? 'disabled-instructor' : '' }}">{{ optional($lection->instructor)->name }}</td>
-                <td>{{ $lection->date }}</td>
-                <td>{{ $lection->schedule }}</td>
-                <td>{{ $lection->assistance ? 'Present' : 'Absent' }}</td>
-                <td class="actions">
-                    <button onclick="editLection('{{ $lection->id }}')" {{ $lection->trashed() ? 'disabled' : '' }}>Edit</button>
-                    
-                    <form action="/register-assistance/{{ $lection->id }}" method="POST" {{ $lection->trashed() ? 'disabled' : '' }}>
-                        @csrf
-                        <button type="submit" {{ $lection->trashed() ? 'disabled' : '' }}>
-                            @if($lection->assistance)
-                                Cancel Assistance
-                            @else
-                                Register Assistance
-                            @endif
-                        </button>
-                    </form>
-                </td>
+    <div id="container">
+        <h1>Lection Management</h1>
+        <button id="createLectionButton">Create Lection</button>
+        <button onclick="togglePayments()">
+            {{ $showAll ? 'Ver Lecciones Activas' : 'Ver Todas las Lecciones' }}
+        </button>
+        <table id="lectionTable">
+            <tr>
+                <th>User</th>
+                <th>Instructor</th>
+                <th>Date</th>
+                <th>Schedule</th>
+                <th>Assistance</th>
+                <th>Actions</th>
             </tr>
-        @endforeach
-    </table>
 
-    <div id="popup">
-        <h2 id="popupTitle">Create Lection</h2>
-        <form id="lectionForm" action="/lections/{id}" method="POST">
-            @csrf
-            @method('PUT')
-            <input type="hidden" id="method" name="_method" value="POST">
-            <label for="user_id">User:</label><br>
-            <select id="user_id" name="user_id">
-                @if($users instanceof \App\Models\User)
-                <option value="{{ $users->id }}">{{ $users->name }}</option>
-                @elseif($users instanceof \Illuminate\Database\Eloquent\Collection)
-                @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                @endforeach
-                @else
-                <option>No se pudo obtener el usuario</option>
-                @endif
-            </select><br>
-            <label for="instructor_id">Instructor:</label><br>
-            <select id="instructor_id" name="instructor_id">
-                @foreach ($instructors as $instructor)
-                <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
-                @endforeach
-            </select><br>
-            <label for="date">Date:</label><br>
-            <input type="date" id="date" name="date"><br>
-            <label for="schedule">Schedule:</label><br>
-            <input type="time" id="schedule" name="schedule"><br>
-            <input type="submit" id="submitButton" value="Create">
-        </form>
-        <button onclick="document.getElementById('popup').style.display='none'">Close</button>
+            @foreach ($lections as $lection)
+                <tr class="{{ $lection->trashed() ? 'deleted-row' : '' }} {{ $lection->trashed() ? 'disabled-lection' : '' }}">
+                    <td>{{ optional($lection->user)->name }}</td>
+                    <td class="{{ optional($lection->instructor)->trashed() ? 'disabled-instructor' : '' }}">{{ optional($lection->instructor)->name }}</td>
+                    <td>{{ $lection->date }}</td>
+                    <td>{{ $lection->schedule }}</td>
+                    <td>{{ $lection->assistance ? 'Present' : 'Absent' }}</td>
+                    <td class="actions">
+                        <button onclick="editLection('{{ $lection->id }}')" {{ $lection->trashed() ? 'disabled' : '' }}>Edit</button>
+                        
+                        <form action="/register-assistance/{{ $lection->id }}" method="POST" {{ $lection->trashed() ? 'disabled' : '' }}>
+                            @csrf
+                            <button type="submit" {{ $lection->trashed() ? 'disabled' : '' }}>
+                                @if($lection->assistance)
+                                    Cancel Assistance
+                                @else
+                                    Register Assistance
+                                @endif
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+
+        <div id="popup">
+            <h2 id="popupTitle">Create Lection</h2>
+            <form id="lectionForm" action="/lections/{id}" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" id="method" name="_method" value="POST">
+                <label for="user_id">User:</label><br>
+                <select id="user_id" name="user_id">
+                    @if($users instanceof \App\Models\User)
+                    <option value="{{ $users->id }}">{{ $users->name }}</option>
+                    @elseif($users instanceof \Illuminate\Database\Eloquent\Collection)
+                    @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                    @else
+                    <option>No se pudo obtener el usuario</option>
+                    @endif
+                </select><br>
+                <label for="instructor_id">Instructor:</label><br>
+                <select id="instructor_id" name="instructor_id">
+                    @foreach ($instructors as $instructor)
+                    <option value="{{ $instructor->id }}">{{ $instructor->name }}</option>
+                    @endforeach
+                </select><br>
+                <label for="date">Date:</label><br>
+                <input type="date" id="date" name="date"><br>
+                <label for="schedule">Schedule:</label><br>
+                <input type="time" id="schedule" name="schedule"><br>
+                <input type="submit" id="submitButton" value="Create">
+            </form>
+            <button onclick="document.getElementById('popup').style.display='none'">Close</button>
+        </div>
     </div>
 
     <script>
