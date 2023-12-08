@@ -129,7 +129,10 @@
 <body>
 <div id="container">
     <h1>Registro de membresías</h1>
-    <!-- <button id="crearButton">Crear Membresías</button> -->
+    <form action="/home" method="GET">
+            @csrf
+            <button type="submit">Home</button>
+        </form>
     <table id="tablaDatos">
         <tr>
             <th>Nombre</th>

@@ -140,8 +140,31 @@
     </style>
 </head>
 <body>
+    @if ($errors->any())
+        <script>
+            function showErrorAlert() {
+                alert('Este correo ya ha sido registrado. Por favor, ingrese otro.');
+            }
+
+            showErrorAlert();
+        </script>
+    @endif
+    @if (session('success'))
+        <script>
+            function showSuccessAlert() {
+                alert('Usuario creado exitosamente.');
+            }
+
+            showSuccessAlert();
+        </script>
+    @endif
+
     <div id="container">
         <h1>Registro de Usuarios</h1>
+        <form action="/home" method="GET">
+            @csrf
+            <button type="submit">Home</button>
+        </form>
         <button id="crearButton">Crear Usuario</button>
         <button onclick="toggleUsers()">
             {{ $showAll ? 'Ver Usuarios Activos' : 'Ver Todos los Usuarios' }}
@@ -182,17 +205,19 @@
 
         <div id="popup">
             <h2 id="popupTitle">Crear Usuario</h2>
-            <form id="userForm" action="/users" method="POST">
+            <form id="userForm" action="/users" method="POST" onsubmit="return validateForm()">
                 @csrf
                 <input type="hidden" id="method" name="_method" value="POST">
                 <label for="name">Nombre:</label><br>
-                <input type="text" id="name" name="name"><br>
+                <input type="text" id="name" name="name" required><br>
                 <label for="last_name">Apellido:</label><br>
-                <input type="text" id="last_name" name="last_name"><br>
+                <input type="text" id="last_name" name="last_name" required><br>
                 <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email"><br>
+                <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br>
                 <label for="password">Contraseña:</label><br>
-                <input type="password" id="password" name="password"><br>
+                <input type="password" id="password" name="password" required><br>
+                <label for="confirm_password">Confirmar Contraseña:</label><br>
+                <input type="password" id="confirm_password" name="confirm_password" required><br>
                 <input type="submit" id="submitButton" value="Crear">
             </form>
             <button onclick="document.getElementById('popup').style.display='none'">Cerrar</button>
@@ -200,6 +225,37 @@
     </div>
 
     <script>
+        function validateForm() {
+            var emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+            var name = document.getElementById('name').value;
+            var lastName = document.getElementById('last_name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+
+            if (name.trim() === '' || lastName.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
+                alert('Todos los campos son obligatorios');
+                return false;
+            }
+
+            if (!emailRegex.test(email) || !emailRegex.test(confirmEmail)) {
+                alert('Por favor, ingrese correos electrónicos válidos');
+                return false;
+            }
+
+            if (email !== confirmEmail) {
+                alert('Los correos electrónicos no coinciden');
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return false;
+            }
+
+            return true;
+        }
+
         function toggleUsers() {
             var showAll = {{ $showAll ? 'true' : 'false' }};
             window.location.href = '/users?show_all=' + (showAll ? '0' : '1');

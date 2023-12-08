@@ -132,6 +132,10 @@
 <body>
     <div id="container">
         <h1>Registro de lecciones</h1>
+        <form action="/home" method="GET">
+            @csrf
+            <button type="submit">Home</button>
+        </form>
         <button id="createLectionButton">Crear Lección</button>
         <button onclick="togglePayments()">
             {{ $showAll ? 'Ver Lecciones Activas' : 'Ver Todas las Lecciones' }}

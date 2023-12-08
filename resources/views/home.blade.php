@@ -222,7 +222,7 @@
                 <form action="/lections/{{ $user->id }}" method="POST">
                   @csrf
                   <input type="hidden" name="show_all" value="1">
-                  <button type="submit" class="btn btn-primary" style="border: none; background-color: #F1CCBA;">Ver clases</button>
+                  <button type="submit" class="btn btn-black" style="border: none; background-color: #F1CCBA;">Ver clases</button>
                 </form>
               </td>
             </tr>

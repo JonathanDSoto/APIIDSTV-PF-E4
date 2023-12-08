@@ -140,6 +140,10 @@
 <body>
 <div id="container">
     <h1>Registro de Instructores</h1>
+    <form action="/home" method="GET">
+        @csrf
+        <button type="submit">Home</button>
+    </form>
     <button id="crearButton">Crear Instructor</button>
     <button onclick="toggleInstructors()">
         {{ $showAll ? 'Ver Instructores Activos' : 'Ver Todos los Instructores' }}

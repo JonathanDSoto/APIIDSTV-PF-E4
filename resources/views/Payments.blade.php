@@ -132,6 +132,10 @@
 <body>
     <div id="container">
         <h1>Registro de Pagos</h1>
+        <form action="/home" method="GET">
+            @csrf
+            <button type="submit">Home</button>
+        </form>
         <button id="crearButton">Crear Pago</button>
         <button onclick="togglePayments()">
             {{ $showAll ? 'Ver Pagos Activos' : 'Ver Todos los Pagos' }}
