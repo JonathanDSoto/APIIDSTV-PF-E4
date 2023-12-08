@@ -22,12 +22,18 @@
             gap: 10px;
         }
 
-        .disabled-lection {
-            opacity: 0.5;
+        .deleted-row button {
+            opacity: 1;
+            cursor: pointer;
         }
 
-        .disabled-instructor {
+        .deleted-row button:disabled {
             opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .deleted-row button[disabled] {
+            cursor: not-allowed;
         }
 
         #container {
