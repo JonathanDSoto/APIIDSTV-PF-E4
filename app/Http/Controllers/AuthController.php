@@ -11,6 +11,15 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {   
+
+    public function logout()
+    {
+        Auth::logout();
+
+        // Redirigir a la página de inicio de sesión u otra página
+        return redirect('/');
+    }
+
     //Login
     public function showLoginForm()
     {

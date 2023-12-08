@@ -183,7 +183,7 @@
             </a>
           </li>
           <li class="nav-item mt-auto">
-            <a href="/" id="logoutLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="bottom-end" data-bs-original-title="LogOut">
+            <a href="/logout" id="logoutLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="bottom-end" data-bs-original-title="LogOut">
               Cerrar Sesión
             </a>
           </li>
