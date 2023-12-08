@@ -22,7 +22,7 @@ class PaymentsController extends Controller
         $memberships = Membership::all();
 
         return view('payments', ['users' => $users, 'payments' => $payments, 'memberships' => $memberships, 'showAll' => $showAll]);
-    }  
+    }
 
     public function create(Request $request)
     {
@@ -57,11 +57,12 @@ class PaymentsController extends Controller
 
     public function paymentsByUser(string $user_id)
     {
+        $showAll = false;
         $user = User::withTrashed()->findOrFail($user_id);
         $payments = Payment::where('user_id', $user_id)->withTrashed()->get();
         $memberships = Membership::all();
     
-        return view('payments', ['users' => $user, 'payments' => $payments, 'memberships' => $memberships]);
+        return view('payments', ['users' => $user, 'payments' => $payments, 'memberships' => $memberships, 'showAll' => $showAll]);
     }      
 
     public function update(Request $request, string $id)

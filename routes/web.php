@@ -50,8 +50,6 @@ Route::put('/lections/{id}', [LectionsController::class, 'update']);
 Route::delete('/lections/{id}', [LectionsController::class, 'destroy']);
 
 //Login
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 //Register
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
@@ -60,3 +58,15 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 //Home 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class, 'search']);
+
+// Route::group(['middleware' => ['auth']], function() {     
+//     Route::get('/home', function () {
+        Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+        Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+//     }); });
+
+//use App\Http\Middleware\Authenticate;
+ 
+// Route::get('/profile', function () {
+//     // ...
+// })->middleware(Authenticate::class);
