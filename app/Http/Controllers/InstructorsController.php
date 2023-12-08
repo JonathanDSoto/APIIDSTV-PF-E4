@@ -36,6 +36,14 @@ class InstructorsController extends Controller
         return redirect('/instructors');
     }
 
+    public function restore(string $id)
+    {
+        $instructor = Instructor::withTrashed()->findOrFail($id);
+        $instructor->restore();
+
+        return redirect('/instructors');
+    }
+
     public function show(string $id)
     {
         $instructor = Instructor::findOrFail($id);

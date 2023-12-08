@@ -72,9 +72,20 @@
             background-color: #f2f2f2;
         }
 
-        .deleted-row {
-            opacity: 0.5;
+        .deleted-row button {
+            opacity: 1;
+            cursor: pointer;
         }
+
+        .deleted-row button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .deleted-row button[disabled] {
+            cursor: not-allowed;
+        }
+
 
         #popup {
             display: none;
@@ -141,24 +152,30 @@
             <th>Acciones</th>
         </tr>
         @foreach ($instructors as $instructor)
-        <tr style="{{ $instructor->trashed() ? 'opacity: 0.5;' : '' }}">
+        <tr class="{{ $instructor->trashed() ? 'deleted-row' : '' }}">
             <td>{{ $instructor->name }}</td>
             <td>{{ $instructor->last_name }}</td>
             <td>{{ $instructor->specialty }}</td>
             <td>
-            <div style="display: flex; gap: 10px;">
-                <button onclick="editarInstructor('{{ $instructor->id }}', '{{ $instructor->name }}', '{{ $instructor->last_name }}', '{{ $instructor->specialty }}')" {{ $instructor->trashed() ? 'disabled' : '' }}>
-                    Editar
-                </button>
-                <form action="/instructors/{{ $instructor->id }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" {{ $instructor->trashed() ? 'disabled' : '' }}>
-                        Eliminar
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="editarInstructor('{{ $instructor->id }}', '{{ $instructor->name }}', '{{ $instructor->last_name }}', '{{ $instructor->specialty }}')" {{ $instructor->trashed() ? 'disabled' : '' }}>
+                        Editar
                     </button>
-                </form>
-            </div>
-        </td>
+                    <form action="/instructors/{{ $instructor->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" {{ $instructor->trashed() ? 'disabled' : '' }}>
+                            Eliminar
+                        </button>
+                    </form>
+                    @if ($instructor->trashed())
+                        <form action="/instructors/restore/{{ $instructor->id }}" method="POST">
+                            @csrf
+                            <button type="submit">Habilitar Instructor</button>
+                        </form>
+                    @endif
+                </div>
+            </td>
         </tr>
         @endforeach
     </table>
@@ -181,33 +198,33 @@
     </div>
 </div>
 
-    <script>
-        function toggleInstructors() {
-            var showAll = {{ $showAll ? 'true' : 'false' }};
-            window.location.href = '/instructors?show_all=' + (showAll ? '0' : '1');
-        }
+<script>
+    function toggleInstructors() {
+        var showAll = {{ $showAll ? 'true' : 'false' }};
+        window.location.href = '/instructors?show_all=' + (showAll ? '0' : '1');
+    }
 
-        document.getElementById('crearButton').onclick = function() {
-            document.getElementById('popupTitle').textContent = 'Crear Instructor';
-            document.getElementById('instructorForm').action = '/instructors';
-            document.getElementById('method').value = 'POST';
-            document.getElementById('submitButton').value = 'Crear';
-            document.getElementById('name').value = '';
-            document.getElementById('last_name').value = '';
-            document.getElementById('specialty').value = '';
-            document.getElementById('popup').style.display = 'block';
-        };
+    document.getElementById('crearButton').onclick = function() {
+        document.getElementById('popupTitle').textContent = 'Crear Instructor';
+        document.getElementById('instructorForm').action = '/instructors';
+        document.getElementById('method').value = 'POST';
+        document.getElementById('submitButton').value = 'Crear';
+        document.getElementById('name').value = '';
+        document.getElementById('last_name').value = '';
+        document.getElementById('specialty').value = '';
+        document.getElementById('popup').style.display = 'block';
+    };
 
-        function editarInstructor(id, name, lastName, specialty) {
-            document.getElementById('popupTitle').textContent = 'Editar Instructor';
-            document.getElementById('instructorForm').action = '/instructors/' + id;
-            document.getElementById('method').value = 'PUT';
-            document.getElementById('submitButton').value = 'Guardar';
-            document.getElementById('name').value = name;
-            document.getElementById('last_name').value = lastName;
-            document.getElementById('specialty').value = specialty;
-            document.getElementById('popup').style.display = 'block';
-        }
-    </script>
+    function editarInstructor(id, name, lastName, specialty) {
+        document.getElementById('popupTitle').textContent = 'Editar Instructor';
+        document.getElementById('instructorForm').action = '/instructors/' + id;
+        document.getElementById('method').value = 'PUT';
+        document.getElementById('submitButton').value = 'Guardar';
+        document.getElementById('name').value = name;
+        document.getElementById('last_name').value = lastName;
+        document.getElementById('specialty').value = specialty;
+        document.getElementById('popup').style.display = 'block';
+    }
+</script>
 </body>
 </html>

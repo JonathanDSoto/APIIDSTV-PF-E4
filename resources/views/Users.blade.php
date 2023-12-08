@@ -75,8 +75,18 @@
             background-color: #f2f2f2;
         }
 
-        .deleted-row {
+        .deleted-row button {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .deleted-row button:disabled {
             opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .deleted-row button[disabled] {
+            cursor: not-allowed;
         }
 
         #popup {
@@ -144,29 +154,29 @@
                 <th>Acciones</th>
             </tr>
             @foreach ($users as $user)
-            <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->last_name }}</td>
-                <td>{{ $user->email }}</td>
-                <td class="action-buttons">
-                    <button onclick="editarUsuario('{{ $user->id }}', decodeURIComponent('{{ rawurlencode($user->name) }}'), decodeURIComponent('{{ rawurlencode($user->last_name) }}'), '{{ $user->email }}')" {{ $user->trashed() ? 'disabled' : '' }}>Editar</button>
-                    <form action="/payments/{{ $user->id }}" method="POST">
-                        @csrf
-                        <button type="submit">Ver pagos</button>
-                    </form>
-                    <form action="/users/{{ $user->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" {{ $user->trashed() ? 'disabled' : '' }}>Eliminar</button>
-                    </form>
-                    @if ($user->trashed())
-                    <form action="/users/restore/{{ $user->id }}" method="POST">
-                        @csrf
-                        <button type="submit">Habilitar Cuenta</button>
-                    </form>
-                    @endif
-                </td>
-            </tr>
+                <tr class="{{ $user->trashed() ? 'deleted-row' : '' }}">
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->last_name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td class="action-buttons">
+                        <button onclick="editarUsuario('{{ $user->id }}', decodeURIComponent('{{ rawurlencode($user->name) }}'), decodeURIComponent('{{ rawurlencode($user->last_name) }}'), '{{ $user->email }}')" {{ $user->trashed() ? 'disabled' : '' }}>Editar</button>
+                        <form action="/payments/{{ $user->id }}" method="POST">
+                            @csrf
+                            <button type="submit">Ver pagos</button>
+                        </form>
+                        <form action="/users/{{ $user->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" {{ $user->trashed() ? 'disabled' : '' }}>Eliminar</button>
+                        </form>
+                        @if ($user->trashed())
+                        <form action="/users/restore/{{ $user->id }}" method="POST">
+                            @csrf
+                            <button type="submit">Habilitar Cuenta</button>
+                        </form>
+                        @endif
+                    </td>
+                </tr>
             @endforeach
         </table>
 

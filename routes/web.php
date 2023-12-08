@@ -36,6 +36,7 @@ Route::delete('/memberships/{id}', [MembershipsController::class, 'destroy']);
 /////////////////////////// Instructor Routes ///////////////////////////
 Route::get('/instructors', [InstructorsController::class, 'index']);
 Route::post('/instructors', [InstructorsController::class, 'create']);
+Route::post('/instructors/restore/{id}', [InstructorsController::class, 'restore']);
 Route::get('/instructors/{id}', [InstructorsController::class, 'show']);
 Route::put('/instructors/{id}', [InstructorsController::class, 'update']);
 Route::delete('/instructors/{id}', [InstructorsController::class, 'destroy']);
