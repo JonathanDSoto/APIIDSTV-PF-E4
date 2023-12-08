@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CRUD de Instructores</title>
+    <title>Instructores</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;

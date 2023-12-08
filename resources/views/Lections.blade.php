@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lection Management</title>
+    <title>Lecciones</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -131,19 +131,19 @@
 </head>
 <body>
     <div id="container">
-        <h1>Lection Management</h1>
-        <button id="createLectionButton">Create Lection</button>
+        <h1>Registro de lecciones</h1>
+        <button id="createLectionButton">Crear Lección</button>
         <button onclick="togglePayments()">
             {{ $showAll ? 'Ver Lecciones Activas' : 'Ver Todas las Lecciones' }}
         </button>
         <table id="lectionTable">
             <tr>
-                <th>User</th>
+                <th>Usuario</th>
                 <th>Instructor</th>
-                <th>Date</th>
-                <th>Schedule</th>
-                <th>Assistance</th>
-                <th>Actions</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Asistencia</th>
+                <th>Acciones</th>
             </tr>
 
             @foreach ($lections as $lection)
@@ -152,17 +152,17 @@
                     <td class="{{ optional($lection->instructor)->trashed() ? 'disabled-instructor' : '' }}">{{ optional($lection->instructor)->name }}</td>
                     <td>{{ $lection->date }}</td>
                     <td>{{ $lection->schedule }}</td>
-                    <td>{{ $lection->assistance ? 'Present' : 'Absent' }}</td>
+                    <td>{{ $lection->assistance ? 'Presente': 'Ausente' }}</td>
                     <td class="actions">
-                        <button onclick="editLection('{{ $lection->id }}')" {{ $lection->trashed() ? 'disabled' : '' }}>Edit</button>
+                        <button onclick="editLection('{{ $lection->id }}')" {{ $lection->trashed() ? 'disabled' : '' }}>Editar</button>
                         
                         <form action="/register-assistance/{{ $lection->id }}" method="POST" {{ $lection->trashed() ? 'disabled' : '' }}>
                             @csrf
                             <button type="submit" {{ $lection->trashed() ? 'disabled' : '' }}>
                                 @if($lection->assistance)
-                                    Cancel Assistance
+                                    Cancelar Asistencia
                                 @else
-                                    Register Assistance
+                                    Registrar Asistencia
                                 @endif
                             </button>
                         </form>
