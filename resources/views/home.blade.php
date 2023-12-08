@@ -179,12 +179,12 @@
           </li>
           <li class="nav-item">
             <a href="/lections" id="customersLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-              Lections
+              Lecciones
             </a>
           </li>
           <li class="nav-item mt-auto">
             <a href="/" id="logoutLink" class="nav-link text-light p-5" style="color: #F1CCBA !important;" title="" data-bs-toggle="tooltip" data-bs-placement="bottom-end" data-bs-original-title="LogOut">
-              LogOut
+              Cerrar Sesión
             </a>
           </li>
         </ul>

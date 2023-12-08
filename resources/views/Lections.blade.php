@@ -146,29 +146,35 @@
                 <th>Acciones</th>
             </tr>
 
+            @if(count($lections) === 0)
+            <tr>
+                <td colspan="6">El usuario no tiene lecciones.</td>
+            </tr>
+            @else
             @foreach ($lections as $lection)
-                <tr class="{{ $lection->trashed() ? 'deleted-row' : '' }} {{ $lection->trashed() ? 'disabled-lection' : '' }}">
-                    <td>{{ optional($lection->user)->name }}</td>
-                    <td class="{{ optional($lection->instructor)->trashed() ? 'disabled-instructor' : '' }}">{{ optional($lection->instructor)->name }}</td>
-                    <td>{{ $lection->date }}</td>
-                    <td>{{ $lection->schedule }}</td>
-                    <td>{{ $lection->assistance ? 'Presente': 'Ausente' }}</td>
-                    <td class="actions">
-                        <button onclick="editLection('{{ $lection->id }}')" {{ $lection->trashed() ? 'disabled' : '' }}>Editar</button>
-                        
-                        <form action="/register-assistance/{{ $lection->id }}" method="POST" {{ $lection->trashed() ? 'disabled' : '' }}>
-                            @csrf
-                            <button type="submit" {{ $lection->trashed() ? 'disabled' : '' }}>
-                                @if($lection->assistance)
-                                    Cancelar Asistencia
-                                @else
-                                    Registrar Asistencia
-                                @endif
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+            <tr class="{{ $lection->trashed() ? 'deleted-row' : '' }} {{ $lection->trashed() ? 'disabled-lection' : '' }}">
+                <td>{{ optional($lection->user)->name }}</td>
+                <td class="{{ optional($lection->instructor)->trashed() ? 'disabled-instructor' : '' }}">{{ optional($lection->instructor)->name }}</td>
+                <td>{{ $lection->date }}</td>
+                <td>{{ $lection->schedule }}</td>
+                <td>{{ $lection->assistance ? 'Presente': 'Ausente' }}</td>
+                <td class="actions">
+                    <button onclick="editLection('{{ $lection->id }}')" {{ $lection->trashed() ? 'disabled' : '' }}>Editar</button>
+
+                    <form action="/register-assistance/{{ $lection->id }}" method="POST" {{ $lection->trashed() ? 'disabled' : '' }}>
+                        @csrf
+                        <button type="submit" {{ $lection->trashed() ? 'disabled' : '' }}>
+                            @if($lection->assistance)
+                            Cancelar Asistencia
+                            @else
+                            Registrar Asistencia
+                            @endif
+                        </button>
+                    </form>
+                </td>
+            </tr>
             @endforeach
+            @endif
         </table>
 
         <div id="popup">
