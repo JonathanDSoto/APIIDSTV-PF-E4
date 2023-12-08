@@ -158,7 +158,7 @@
     <!-- Ventana emergente con el formulario para crear un usuario -->
     <div id="popup">
         <h2 id="popupTitle">Crear Usuario</h2>
-        <form id="userForm" action="/memberships" method="POST">
+        <form id="userForm" action="/memberships" method="POST" onsubmit="return validateForm()">
             @csrf
             <input type="hidden" id="method" name="_method" value="POST">
             <label for="name">Nombre:</label><br>
@@ -171,6 +171,18 @@
     </div>
 </div>
     <script>
+        function validateForm() {
+            var price = document.getElementById('price').value;
+            var numericPrice = parseFloat(price);
+
+            if (numericPrice < 0) {
+                alert('El precio no puede ser menor a 0');
+                return false;
+            }
+
+            return true;
+        }
+
         document.getElementById('crearButton').onclick = function() {
             document.getElementById('popupTitle').textContent = 'Crear Membresía';
             document.getElementById('userForm').action = '/memberships';
