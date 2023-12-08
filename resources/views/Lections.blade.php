@@ -127,6 +127,13 @@
             border-radius: 4px;
             margin-top: 10px;
         }
+        .disabled-instructor {
+            opacity: 0.5;
+        }
+
+        .disabled-user {
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
@@ -156,7 +163,7 @@
             </tr>
             @else
             @foreach ($lections as $lection)
-            <tr class="{{ $lection->trashed() ? 'deleted-row' : '' }} {{ $lection->trashed() ? 'disabled-lection' : '' }}">
+            <tr class="{{ $lection->trashed() ? 'deleted-row' : '' }} {{ $lection->trashed() ? 'disabled-lection' : '' }} {{ optional($lection->user)->trashed() ? 'disabled-user' : '' }}">
                 <td>{{ optional($lection->user)->name }}</td>
                 <td class="{{ optional($lection->instructor)->trashed() ? 'disabled-instructor' : '' }}">{{ optional($lection->instructor)->name }}</td>
                 <td>{{ $lection->date }}</td>
@@ -183,7 +190,7 @@
 
         <div id="popup">
             <h2 id="popupTitle">Create Lection</h2>
-            <form id="lectionForm" action="/lections/{id}" method="POST">
+            <form id="lectionForm" action="/lections/{id}" method="POST" onsubmit="return validateLectionForm()">
                 @csrf
                 @method('PUT')
                 <input type="hidden" id="method" name="_method" value="POST">
@@ -216,6 +223,24 @@
     </div>
 
     <script>
+        function validateLectionForm() {
+            // Get the date and schedule input values
+            var date = document.getElementById('date').value;
+            var schedule = document.getElementById('schedule').value;
+
+            var dateTimeString = date + ' ' + schedule;
+            var currentDate = new Date();
+            currentDate.setSeconds(0);
+            var enteredDateTime = new Date(dateTimeString);
+
+            if (enteredDateTime < currentDate) {
+                alert('Por favor ingrese una fecha y hora que no sean pasadas.');
+                return false;
+            }
+
+            return true;
+        }
+
         function togglePayments() {
             var showAll = {{ $showAll ? 'true' : 'false' }};
             window.location.href = '/lections?show_all=' + (showAll ? '0' : '1');
