@@ -145,8 +145,7 @@
             function showErrorAlert() {
                 alert('Este correo ya ha sido registrado. Por favor, ingrese otro.');
             }
-
-            showErrorAlert();
+            setTimeout(showErrorAlert, 400);
         </script>
     @endif
     @if (session('success'))
@@ -154,8 +153,7 @@
             function showSuccessAlert() {
                 alert('Usuario creado exitosamente.');
             }
-
-            showSuccessAlert();
+            setTimeout(showSuccessAlert, 400);
         </script>
     @endif
 
